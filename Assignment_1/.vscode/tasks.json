@@ -1,0 +1,40 @@
+// {
+//     "version": "2.0.0",
+//     "tasks": [
+//         {
+//             "label": "msvc build",
+//             "type": "shell",
+//             "command": "make",
+//             "args": [
+                
+                
+        
+//             ],
+//             "group":  {
+//                 "kind": "build",
+//                 "isDefault": true
+//             },
+//             "presentation": {
+//                 "reveal":"always"
+//             },
+//             "problemMatcher": "$msCompile"
+//         }
+//     ]
+// }
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build myfile",
+            "type": "shell",
+            "command": "make",
+            "args": [
+              
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

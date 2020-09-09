@@ -1,0 +1,2 @@
+C:\SANDBOX\Algorithms-Practice\Algorithms-Problems\x64\Debug\Algorithms-Problems.exe
+C:\SANDBOX\Algorithms-Practice\Algorithms-Problems\x64\Debug\Algorithms-Problems.pdb
