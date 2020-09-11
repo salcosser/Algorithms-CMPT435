@@ -19,7 +19,7 @@ void Stack::push(std::string arg) {
     Node* oldTop = top;
     n->next = oldTop;
     top = n;
-    //std::cout << top.data << std::endl;    // not needed
+  
     return;
 }
 Node Stack::pop() {

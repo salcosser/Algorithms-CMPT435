@@ -5,14 +5,14 @@
 void Queue::enQueue(std::string s) {
 	
 	if (tail == nullptr) {
-		std::cout << "**First**" << std::endl;
+		
 		Node* n = new Node();
 		n->data = s;
 		tail = n;
 		head = n;
 	}
 	else {
-		std::cout << "**Another**" << std::endl;
+		
 		Node* t = new Node();
 		t->data = s;
 		tail->next = t;
