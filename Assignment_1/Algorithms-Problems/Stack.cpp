@@ -1,12 +1,12 @@
 
-#include "LinkedLists.h"
+#include "Stack.h"
 #include <iostream>
 #include <string>
 
 
 
 bool Stack::isEmpty() {
-    if (top->next == nullptr) {
+    if (top == nullptr) {
         return true;
     }
     else {
@@ -14,11 +14,11 @@ bool Stack::isEmpty() {
     }
 }
 void Stack::push(std::string arg) {
-    Node n = Node();
-    n.data = arg;
+    Node* n = new Node();
+    n->data = arg;
     Node* oldTop = top;
-    n.next = oldTop;
-    top = &n;
+    n->next = oldTop;
+    top = n;
     //std::cout << top.data << std::endl;    // not needed
     return;
 }
