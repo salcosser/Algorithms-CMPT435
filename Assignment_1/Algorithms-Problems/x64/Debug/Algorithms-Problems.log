@@ -1,4 +1,5 @@
 ﻿  Main.cpp
-C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Main.cpp(92,27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Main.cpp(152,27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Queue.cpp
+  Stack.cpp
+  Generating Code...
   Algorithms-Problems.vcxproj -> C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\x64\Debug\Algorithms-Problems.exe

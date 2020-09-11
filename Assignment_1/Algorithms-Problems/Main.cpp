@@ -7,7 +7,7 @@
 #include <algorithm> // dont get mad, this is just to remove the spaces from the lines
 using namespace std;
 
-void printList(Node* e)
+void printList(Node *e)
 {
 	if (e == nullptr)
 	{
@@ -29,9 +29,9 @@ void LinkedListDemo()
 {
 	std::cout << "This is a demonstration of a linked list" << std::endl;
 	//Node a, b, c;
-	Node* a = new Node();
-	Node* b = new Node();
-	Node* c = new Node();
+	Node *a = new Node();
+	Node *b = new Node();
+	Node *c = new Node();
 	a->data = "Sam";
 	a->next = b;
 	b->data = "Bill";
@@ -79,58 +79,83 @@ void QueueDemo()
 	printList(q.head);
 }
 
-
-void AlanParse() {
+void AlanParse()
+{
 	fstream newfile;
+	string arr[1000];
+	string ln;
+	int count = 0;
+	int pCount = 0;
+	newfile.open("magicitems.txt", ios::in);
+	if (newfile.is_open())
+	{
+		int cnt = 0;
+		while (getline(newfile, ln))
+			arr[cnt++] = ln;
+		int placeHolder = 0;
+		while (arr[placeHolder] != "")
+		{
 
-	newfile.open("magicitems.txt", ios::in); //open a file to perform read operation using file object
-	if (newfile.is_open()) {   //checking whether the file is open
-		string ln;
-		int count = 0;
-		int pCount = 0;
-		while (getline(newfile, ln)) {
-									//read data from file object and put it into string.
-			string ogLine = ln;
+			//read data from file object and put it into string.
+			string ogLine = arr[placeHolder];
 			string line;
 			Stack stack = Stack();
 			Queue queue = Queue();
-			int len;
-			for(char c : ln){
-				if(c == ' '){
+			int len = 0;
+			for (char c : arr[placeHolder])
+			{
+				if (c == ' ')
+				{
 					continue;
-				}else{
+				}
+				else
+				{
 					len++;
 					string temp;
 					temp += toupper(c);
-					 stack.push(temp);
-					 queue.enQueue(temp);
+					stack.push(temp);
+					queue.enQueue(temp);
 				}
 			}
-			for (int i = 0; i < len; i++) {
-				string  st = stack.pop().data;
-				string  qu = queue.deQueue().data;
+			for (int i = 0; i < len; i++)
+			{
+				string st = stack.pop().data;
+				string qu = queue.deQueue().data;
 
-				if (st == qu) {
-					pCount++;
-					cout << ++count << ": " << ogLine << ": is a palindrome." << endl;
+				if (st == qu)
+				{
+					if (i == (len - 1))
+					{
+						pCount++;
+						std::cout << ++count << ": " << ogLine << ": is a palindrome." << endl;
+					}
+
+					continue;
+				}
+				else
+				{
+					++count;
+					//cout << ++count << ":" << endl;
+					//cout << st << " and " << qu << " dont match in " << line << ", so" << endl;
+					//	cout << ogLine << ": is not a palindrome." << endl;
 					break;
 				}
-				else {
-					cout << ++count << ":" << endl;
-					cout << st << " and " << qu << " dont match in " << line << ", so" << endl;
-					cout << ogLine << ": is not a palindrome." << endl;
-					break;
-				}
-				
 			}
-			cout << endl;
+			placeHolder++;
 		}
-
-		cout << "In Total, there were " << pCount << " palindromes." << endl;
-		newfile.close(); //close the file object.
 	}
-	return;
+
+
+//checking whether the file is open
+
+//get size of file
+// add to array
+
+std::cout << "In Total, there were " << pCount << " palindromes." << endl;
+
+return;
 }
+
 int main()
 {
 	/* LinkedListDemo(); Uncomment from here to line 139 for a demo of my Linked List, Stack, and Queue
