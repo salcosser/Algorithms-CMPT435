@@ -2,4 +2,9 @@
   Queue.cpp
   Stack.cpp
   Generating Code...
-  Algorithms-Problems.vcxproj -> C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\x64\Debug\Algorithms-Problems.exe
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Stack.cpp(18): error C4700: uninitialized local variable 'n' used
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Queue.cpp(10): error C4700: uninitialized local variable 'n' used
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Queue.cpp(17): error C4700: uninitialized local variable 't' used
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Main.cpp(34): error C4700: uninitialized local variable 'a' used
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Main.cpp(35): error C4700: uninitialized local variable 'b' used
+C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\Main.cpp(37): error C4700: uninitialized local variable 'c' used

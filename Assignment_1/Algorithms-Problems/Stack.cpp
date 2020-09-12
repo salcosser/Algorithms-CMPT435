@@ -14,7 +14,8 @@ bool Stack::isEmpty() {
     }
 }
 void Stack::push(std::string arg) {
-    Node* n = new Node();
+    
+    Node* n  = new Node();
     n->data = arg;
     Node* oldTop = top;
     n->next = oldTop;

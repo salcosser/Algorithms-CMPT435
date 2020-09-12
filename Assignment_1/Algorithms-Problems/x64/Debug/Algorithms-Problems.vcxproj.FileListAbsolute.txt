@@ -1,4 +1,2 @@
 C:\SANDBOX\Algorithms-Practice\Algorithms-Problems\x64\Debug\Algorithms-Problems.exe
 C:\SANDBOX\Algorithms-Practice\Algorithms-Problems\x64\Debug\Algorithms-Problems.pdb
-C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\x64\Debug\Algorithms-Problems.exe
-C:\SANDBOX\Algorithms-CMPT435\Assignment_1\Algorithms-Problems\x64\Debug\Algorithms-Problems.pdb
