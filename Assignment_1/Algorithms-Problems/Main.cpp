@@ -4,9 +4,8 @@
 #include <fstream>
 #include <string>
 #include <cassert>
-#include <algorithm> // dont get mad, this is just to remove the spaces from the lines
 using namespace std;
-
+// For cleanliness, inline comments in implementation are moved to the documentation
 void printList(Node *e)
 {
 	if (e == nullptr)

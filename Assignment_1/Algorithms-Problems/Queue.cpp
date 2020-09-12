@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Queue.h"
-
+// For cleanliness, inline comments in implementation are moved to the documentation
 void Queue::enQueue(std::string s) {
 	
 	if (tail == nullptr) {

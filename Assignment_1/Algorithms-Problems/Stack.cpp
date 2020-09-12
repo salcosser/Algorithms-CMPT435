@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-
+// For cleanliness, inline comments in implementation are moved to the documentation
 
 bool Stack::isEmpty() {
     if (top == nullptr) {
