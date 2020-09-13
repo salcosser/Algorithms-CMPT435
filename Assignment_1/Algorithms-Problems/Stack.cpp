@@ -5,33 +5,39 @@
 
 // For cleanliness, inline comments in implementation are moved to the documentation
 
-bool Stack::isEmpty() {
-    if (top == nullptr) {
+bool Stack::isEmpty()
+{
+    if (top == nullptr)
+    {
         return true;
     }
-    else {
+    else
+    {
         return false;
     }
 }
-void Stack::push(std::string arg) {
-    
-    Node* n  = new Node();
+void Stack::push(std::string arg)
+{
+
+    Node *n = new Node();
     n->data = arg;
-    Node* oldTop = top;
+    Node *oldTop = top;
     n->next = oldTop;
     top = n;
-  
+
     return;
 }
-Node Stack::pop() {
-    if (isEmpty()) {
+Node Stack::pop()
+{
+    if (isEmpty())
+    {
         throw "Memory underflow Error";
     }
-    else {
+    else
+    {
         Node retVal = Node(*top);
-        Node* newTop = top->next;
+        Node *newTop = top->next;
         top = newTop;
         return retVal;
     }
 }
-

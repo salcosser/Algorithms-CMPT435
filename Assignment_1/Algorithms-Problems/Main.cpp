@@ -144,15 +144,14 @@ void AlanParse()
 		}
 	}
 
+	//checking whether the file is open
 
-//checking whether the file is open
+	//get size of file
+	// add to array
 
-//get size of file
-// add to array
+	std::cout << "In Total, there were " << pCount << " palindromes." << endl;
 
-std::cout << "In Total, there were " << pCount << " palindromes." << endl;
-
-return;
+	return;
 }
 
 int main()
