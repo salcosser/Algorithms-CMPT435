@@ -26,7 +26,7 @@ void Stack::push(std::string arg)
     top = n;
 
     return;
-}
+} 
 Node Stack::pop()
 {
     if (isEmpty())

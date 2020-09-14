@@ -5,7 +5,7 @@
 void Queue::enQueue(std::string s)
 {
 
-	if (tail == nullptr)
+	if (isEmpty())
 	{
 
 		Node *n = new Node();
