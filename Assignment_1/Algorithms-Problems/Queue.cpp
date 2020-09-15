@@ -51,6 +51,8 @@ Node Queue::deQueue()
 		}
 		else
 		{
+			head = nullptr;
+			tail = nullptr;
 			return n;
 		}
 	}
