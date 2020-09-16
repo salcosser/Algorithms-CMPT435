@@ -1,0 +1,553 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Spring 2019
+% Lab One
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt]{article} 
+
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{float}
+\usepackage{scrextend}
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{page \thepage\ of \pageref{LastPage}} % Page numbering for center footer
+\fancyfoot[R]{}
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont \normalsize 
+   \textsc{CMPT 435 - Spring 2019 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \large{Assignment One -- Palindrome Checker} \\
+   \textsc{Checking for Palindromes With Stacks and Queues}\\[20pt]% Assignment title
+
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+   
+}
+
+	% Today's date.
+   \author{Sam Alcosser \\ \normalsize Samuel.Alcosser1@Marist.edu}
+\date{\normalsize\today} 
+\begin{document}
+
+
+
+\fontfamily{bch}\selectfont
+\maketitle
+\tableofcontents
+ % Print the title
+\newpage
+
+\section{Introduction}
+\subsection{What is this project?}
+
+The task of this project was to use stacks and queues, which we wrote ourselves, to be able to test whether or not each item of a 666 line text document is a palindrome. 
+
+\subsection{About This Document}
+
+The use of this extensive documentation is meant to be a cleaner way of explaining how the assignment function works. Because of this, the only code comments in the program itself briefly explain the functions of each class within their respective header files. Other than these, there are no actual comments.
+
+\section{Logic and Functionality}
+
+\textbf{Stacks, Queues, and Palindromes}
+
+To test the palindromes, the basic structure of the logic is to put each character, excluding spaces, into a stack and into a separate queue at the same time. The opposing last in first out (LIFO) nature of stacks and first in first out (FIFO) system of queues allow for this process to work. Because of the ordering of the stack and the queue, the characters of the line can be read from the outside in.
+
+
+
+
+\subsection{Analysis of Class and Header Files}
+
+
+\subsubsection{\texttt{Node.h} :The Node Class}
+\begin{addmargin}[-5em]{1em}
+    
+
+\begin{small}
+\begin{minted}[linenos=true, ]{cpp}
+#pragma once
+#include <string>
+#include <iostream>
+class Node{	// defining class for the node that has the pointer and the data
+public:		
+	std::string data;	// stores data for the node
+	Node* next;			// stores pointer for the node
+	Node() {};			// constructor for Node class
+};
+
+\end{minted}
+\end{small}
+\end{addmargin}
+
+The node class is a very simple object. So simple in fact, that there is no \texttt{.cpp} class file to go along with it. In reality, this class could have been turned into a \texttt{struct}, although to be honest the former option was easier to implement. After some assistance from Dr. Labouseur, I was able to grasp how to correctly deal with pointers to objects. The contents of a \texttt{Node} object, as defined by me, are \texttt{std::string data}, \texttt{Node* next}, and the constructor \texttt{Node()\{\}}.
+
+
+
+The first one, \texttt{std::string data} , is simply the attribute that holds the data of the node in a string. \texttt{Node* next} is a pointer to another Node. The ability to have an attribute of this type is somewhat new to me, although I do see the use of it. With it, and with a general understanding of how it works, it is possible to have code that more accurately represents what the compiler will be doing. Something like this would never even be a thought when using another language such as Java. Lastly, I learned to use the \texttt{\#pragma once} preprocessor directive to avoid using header guards on all classes. This is seen throughout the rest of the classes as well.
+
+
+
+\subsubsection{\texttt{Stack.h} :The Stack Class}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+#pragma once
+#include <iostream>
+#include <string>
+#include "Node.h"
+class Stack
+{
+public:
+	Node *top;					//points to the top node of the stack
+	bool isEmpty();				//tests whether or not the stack is empty
+	void push(std::string arg); //function to add a node to the top of the stack
+	Node pop();					//function to take something off of the stack
+};
+
+\end{minted}
+\end{small}
+\end{addmargin}
+
+Above is the header file for the \texttt{Stack} class that I made. Due to the extensive comments, I will now move on to reviewing its \texttt{.cpp} companion file with the definitions of the methods. Starting with the \texttt{isEmpty()} function.
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+bool Stack::isEmpty()
+{
+    if (top == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+\end{minted}
+\end{small}
+\end{addmargin}
+This is a simple method to check whether or not the stack is empty or not. All that the function does is check whether the \texttt{top} pointer of the stack is pointing to anything,  and returns the answer as a boolean. This method is actually used inside of another one of \texttt{Stack}s' methods called \texttt{pop()}.
+
+
+
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+Node Stack::pop()
+{
+    if (isEmpty())
+    {
+        throw "Memory underflow Error";
+    }
+    else
+    {
+        Node retVal = Node(*top);
+        Node *newTop = top->next;
+        top = newTop;
+        return retVal;
+    }
+}
+
+\end{minted}
+\end{small}
+\end{addmargin}
+This method is used to take an item off of the top of the stack. To account for the possibility of an attempt to pop off an empty stack, the \texttt{isEmpty()} method is used. As long as this function returns \texttt{false}, the function proceeds to take off of the top of the stack. It does so by copying the top \texttt{node} and saving it to a local variable (line 9), setting the \texttt{top} to the address of the top \texttt{node}s' next pointer  (lines 10,11), and then finally returning the local variable. The final method of this class, \texttt{push(std::string arg)} is shown below.
+
+
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+void Stack::push(std::string arg)
+{
+
+    Node *n = new Node();
+    n->data = arg;
+    Node *oldTop = top;
+    n->next = oldTop;
+    top = n;
+
+    return;
+} 
+\end{minted}
+
+\end{small}
+\end{addmargin}
+
+\vspace{2.5em}
+
+This method is used to add new items to the top of the stack. The process for doing this starts by making a new node named \texttt{n} and giving the string argument to its \texttt{data} field (lines 4,5).After the node is made, a copy of the top pointer from the stack is created (line 6). Finally, the newly created node is then given the copy of the old top pointer and the stack's top pointer is now applied to the new node. (line 7, 8). 
+
+
+
+\subsubsection{\texttt{Queue.h} :The Queue Class}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+#pragma once
+#include "Node.h"
+#include <string>
+class Queue
+{ // header class to define the queue class
+public:
+	Node *head;					 //pointer to the head node
+	Node *tail;					 //pointer to the tail node
+	void enQueue(std::string s); //function which adds a node to the queue
+	Node deQueue();				 //function to take a node off  of the queue
+	bool isEmpty();				 //tests if the queue is empty
+};
+\end{minted}
+\end{small}
+\end{addmargin}
+
+Here is the header file for the \texttt{Queue} class. Generally, it should look very similar to the header file for the \texttt{stack} class. The only differences being \texttt{pop()} and \texttt{push(std::string arg)} are swapped for \texttt{enQueue(std::string s)} and \texttt{deQueue()}. Other than those changes, you will also see that there are now pointers for the \texttt{head} and the \texttt{tail}. The \texttt{head} is most similar to the \texttt{top} pointer of the \texttt{stack}. Although, with the addition of the \texttt{tail}, processes are much quicker.
+
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+bool Queue::isEmpty()
+{
+	if (tail == nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+\end{minted}
+
+\end{small}
+\end{addmargin}
+
+This simple method \texttt{isEmpty()} is used to check if the \texttt{Queue} is empty. The \texttt{Queue} does this simply by checking if the tail is a null pointer and returning the answer as a boolean.
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+void Queue::enQueue(std::string s)
+{
+
+	if (isEmpty())
+	{
+
+		Node *n = new Node();
+		n->data = s;
+		tail = n;
+		head = n;
+	}
+	else
+	{
+
+		Node *t = new Node();
+		t->data = s;
+		tail->next = t;
+		tail = t;
+	}
+	return;
+}
+\end{minted}
+\end{small}
+\end{addmargin}
+
+For the \texttt{enQueue()} method, there are two possibilities of what will happen. Both options start by creating a new \texttt{node} and giving it the data that was passed to the function as a string (lines 7-8, 15-16). Now, what happens next depends on whether or not the \texttt{queue} was tested as empty or not. If the \texttt{queue} was empty, then the newly created \texttt{node} is pointed at by the \texttt{head} and \texttt{tail} pointers (lines 9-10).
+
+Otherwise, The current \texttt{tail} pointer's next pointer is directed at the new \texttt{node}, and the tail pointer is pointed at the new node (lines 17-18). An analogy for this would be that the last person in the line would first point at the new person, putting them in line, before assigning the title of last in line to the new person. The last method of the \texttt{Queue} class is the \texttt{deQueue()} method.
+
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+Node Queue::deQueue()
+{
+	if (isEmpty())
+	{
+		throw "Memory Underflow Error";
+	}
+	else
+	{
+		Node n = Node(*head);
+		if (head->next != nullptr)
+		{
+			Node *newHead = head->next;
+			head = newHead;
+			return n;
+		}
+		else
+		{
+			head = nullptr;
+			tail = nullptr;
+			return n;
+		}
+	}
+}
+\end{minted}
+\end{small}
+\end{addmargin}
+
+The \texttt{deQueue()} method is the most complicated out of all previously reviewed. To begin, the method tests to ensure that the \texttt{queue} is not empty, throwing an error if this is true. (lines 3-6). Then, after making a copy of the current head called \texttt{n} which will later be returned (line 9), the function checks if there is a \texttt{node} after the \texttt{head} (line 10). The reason for this check is that the head pointer must be updated if there are still more elements. This procedure starts by making a new pointer called \texttt{*newHead}, as this will point at the next element after the current head (line 12). After this, \texttt{newHead} is assigned as the memory address /  pointer for \texttt{head}, and the current head copy we called \texttt{n} is returned (lines 13-14). This proecess is much simpler if it is determined that the current head is the only item in the \texttt{queue}. If this is true, the \texttt{head} and \texttt{tail} are reset to null pointers, and the copy of the head is returned (lines 18-20).
+
+\subsection{Using Stacks and Queues To Create The Procedure}
+\textbf{A Quick Note}
+
+Within this section, the logic of how the palindromes are found is discussed. The source code for this process is found on the \texttt{Main.cpp} file. Within this file, you can also find other functions such as \texttt{linkedListDemo()}, \texttt{ StackDemo()}, \texttt{QueueDemo()}, and \texttt{printList()}. Although these functions were useful to display the capabilities of the \texttt{stack} and the \texttt{queue}, they serve no function to help find palindromes and therefore are outside of the scope of this document. Instead, we will focus on the function called \texttt{AlanParse()}, aptly named as my professor, Dr. Alan labouseur, introduced the algorithm.
+\vspace{2.5em}
+
+\textbf{Organization}
+
+Below is the function in its' entirety. Due to the fact that this function is relatively complex, The logic will be broken up and discussed by level of scope.
+\begin{addmargin}[-10em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+void AlanParse()
+{
+	fstream newfile;
+	string arr[1000];
+	string ln;
+	int count = 0;
+	int pCount = 0;
+	newfile.open("magicitems.txt", ios::in);
+	if (newfile.is_open())
+	{
+		int cnt = 0;
+		while (getline(newfile, ln))
+			arr[cnt++] = ln;
+		int placeHolder = 0;
+		while (arr[placeHolder] != "")
+		{
+
+			//read data from file object and put it into string.
+			string ogLine = arr[placeHolder];
+			string line;
+			Stack stack = Stack();
+			Queue queue = Queue();
+			int len = 0;
+			for (char c : arr[placeHolder])
+			{
+				if (c == ' ')
+				{
+					continue;
+				}
+				else
+				{
+					len++;
+					string temp;
+					temp += toupper(c);
+					stack.push(temp);
+					queue.enQueue(temp);
+				}
+			}
+			for (int i = 0; i < len; i++)
+			{
+				string st = stack.pop().data;
+				string qu = queue.deQueue().data;
+
+				if (st == qu)
+				{
+					if (i == (len - 1))
+					{
+						pCount++;
+						std::cout << ++count << ": " << ogLine << ": is a palindrome." << endl;
+					}
+
+					continue;
+				}
+				else
+				{
+					++count;
+					//cout << ++count << ":" << endl;
+					//cout << st << " and " << qu << " dont match in " << line << ", so" << endl;
+					//	cout << ogLine << ": is not a palindrome." << endl;
+					break;
+				}
+			}
+			placeHolder++;
+		}
+	}
+
+	//checking whether the file is open
+
+	//get size of file
+	// add to array
+
+	std::cout << "In Total, there were " << pCount << " palindromes." << endl;
+
+	return;
+}
+\end{minted}
+\end{small}
+\end{addmargin}
+\newpage
+\subsubsection{Initialization}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+void AlanParse()
+{
+	fstream newfile;
+	string arr[1000];
+	string ln;
+	int count = 0;
+	int pCount = 0;
+	newfile.open("magicitems.txt", ios::in);
+	if (newfile.is_open())
+	{
+        ...
+        ...
+        ...
+    }
+	std::cout << "In Total, there were " << pCount << " palindromes." << endl;
+
+	return;
+}
+\end{minted}
+\end{small}
+\end{addmargin}
+The outermost layer of this process begins with setting everything up for the process. a new \texttt{fstream} object is created to handle the source file \texttt{magicitems.txt}, and the file is opened (lines 3, 8). Also, four more variables are initialized of varying types on lines 4-7. The array \texttt{arr[]} is used to keep all of the lines while string variable \texttt{ln} maintains the current line. Lastly, the int variables \texttt{count} and \texttt{pCount} count the overall number of the line and the count of the palindromes respectively. \texttt{pCount} is seen at the bottom being used to display the total number of palindromes once the whole process is over. Now, let's go inside of the curly braces denoting what will take place if the file is open.
+
+\subsubsection{Storing Data In Memory}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+\begin{minted}[linenos=true]{cpp}
+{
+		int cnt = 0;
+		while (getline(newfile, ln))
+			arr[cnt++] = ln;
+		int placeHolder = 0;
+		while (arr[placeHolder] != "")
+		{
+		...
+		...
+		...
+		}
+\end{minted}
+\end{small}
+\end{addmargin}
+ Here the function is simply loading the whole file into memory. This is possible by using a while loop that will add lines from the file one by one as long as there is another line in the file (lines 3,4). Next, another while loop is started. This while loop will iterate continuously until it hits an index in the array that is empty (lines 5,6). This is possible as I made the array so that the file size of 666 lines would not fully populate the it. Well, onto the next level!
+ \subsubsection{Main Logic}
+ 
+ \textbf{Rereorganization}
+ 
+Here is the innermost layer of this function. For some perspective, at this point we have all of the lines stored in an array, and we are currently focusing on the line indicated by the \texttt{placeHolder} index counter. Abstractly speaking, here is where all of the actual processing is completed. The logic will be broken up into two sub sections: Pushing and enQueueing, and Comparing.
+
+
+\subsubsection{Pushing and enQueueing}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+ \begin{minted}[linenos=true]{cpp}
+ 
+//read data from file object and put it into string.
+string ogLine = arr[placeHolder];
+string line;
+Stack stack = Stack();
+Queue queue = Queue();
+int len = 0;
+for (char c : arr[placeHolder])
+{
+    if (c == ' ')
+    {
+        continue;
+    }
+    else
+    {
+        len++;
+        string temp;
+        temp += toupper(c);
+        stack.push(temp);
+        queue.enQueue(temp);
+    }
+}
+
+		
+\end{minted}
+\end{small}
+ \end{addmargin}
+  To begin, the current line indicated as \texttt{arr[placeHolder]} is now assigned to the variable called \texttt{ogLine} (line 2), and a \texttt{Stack} and a \texttt{Queue} are initialized (lines 4,5). Next, Each character of the line that is not a space (lines 9-12) is added to a stack and a queue (lines 18,19). Also, a counter called \texttt{len} is used to keep track of the length of the list. If lines 16 and 17 are confusing, do not worry. These lines are only needed due to complications within the C++ language when it comes to modifying \texttt{string}s and \texttt{char}s.
+\newpage
+\subsubsection{Comparing}
+\begin{addmargin}[-5em]{1em}
+\begin{small}
+ \begin{minted}[linenos=true]{cpp}
+for (int i = 0; i < len; i++)
+{
+    string st = stack.pop().data;
+    string qu = queue.deQueue().data;
+
+    if (st == qu)
+    {
+        if (i == (len - 1))
+        {
+            pCount++;
+            std::cout << ++count << ": " << ogLine << ": is a palindrome." << endl;
+        }
+
+        continue;
+    }
+    else
+    {
+        ++count;
+        //cout << ++count << ":" << endl;
+        //cout << st << " and " << qu << " dont match in " << line << ", so" << endl;
+        //	cout << ogLine << ": is not a palindrome." << endl;
+        break;
+    }
+}
+placeHolder++;
+\end{minted}
+\end{small}
+\end{addmargin}
+
+Finally The chars are \texttt{pop}ped and \texttt{dequeue}d off of their respective lists to be compared. the for loop at the top is used to iterate through the full length of both lists. In this case, the current item off of the stack is called \texttt{st}, and the item off of the queue is called \texttt{qu} (lines 3,4). Here is where the genius comes in. Because of how stacks and queues are built, they will effectivley be comparing  each element of the list from the outside in. This is the exact process needed to check for palindromes. Because of this mirrored comparison, one would not want to waste compute cycles comparing chars once you cross the midpoint of the palindrome. This is the reason for the condition \texttt{if (i == (len-1))}.
+
+With this, we can stop the checking once the for loop reaches the middle of the line with no faulty comparisons. At this point, the \texttt{pCount} variable used to keep track of the number of palindromes and the overall count variable are incremented. After this, there is a console print statement (lines 10,11). If it has not yet hit the midpoint, but the comparison was the same, the loop will \texttt{continue} onto the next letter. If not, and the characters don't match, the overall count variable is incremented, logs are printed, and the program \texttt{break}s out of the loop (lines 16 -22). Finally, after all of this, the \texttt{placeHolder} variable is incremented, and the next line is tested.
+\newpage
+\section{Closing Thoughts}
+\begin{quote}
+    Leave it to computer scientists to devise incredibly complex theorems and solutions to problems that we learned to solve in fifth grade. Either way, the process of experimenting with creating extensive documentation using \LaTeX \hspace{.025em} was quite fun overall. I can definitely see myself using it in the future. Also, I would like to see a 10 year old review 666 lines to check for palindromes in just under 250 milliseconds.
+\end{quote}
+{\textit{\color{red}\huge{\{S.A.\}}}}
+
+\vspace{1.5em}
+\begin{center}
+    
+\end{center}
+\end{document}
