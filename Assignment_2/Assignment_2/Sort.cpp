@@ -1,0 +1,64 @@
+#include "Sort.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+
+//vect
+
+
+void Sort::swap(std::string &a, std::string &b) {
+	std::string  temp = a;
+	 a = b;
+	 b = temp;
+	
+}
+
+void Sort::printList(std::string s[], int n) {
+	for(int i = 0; i<n;i++){
+
+		std::cout << s[i] << std::endl;
+	}
+}
+
+
+int Sort::Insertion(std::string s[], int n)
+{
+
+	int counter = 0;
+	std::string last;
+	for (int i = 1; i < n; i++)
+	{
+		last = s[i];
+		int j = i - 1;
+		while (j >= 0 && s[j] > last)
+		{
+			counter++;
+			s[j + 1] = s[j];
+			j = j - 1;
+		}
+		s[j + 1] = last;
+	}
+	//printList(s, n);
+	return counter;
+}
+
+int Sort::Selection(std::string s[], int n)
+{
+	int low;
+	int counter = 0;
+	for (int i = 0; i < n; i++)
+	{
+		low = i;
+		for (int j = i + 1; j < n; j++) {
+			counter++;
+			if (s[j] < s[low]) {
+				low = j;
+			}
+		}
+		Sort::swap(s[low], s[i]);
+	}
+	//printList(s, n);
+	return counter;
+}

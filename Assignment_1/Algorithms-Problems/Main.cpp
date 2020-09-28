@@ -155,10 +155,10 @@ void AlanParse()
 }
 
 int main()
-{
-	/* LinkedListDemo(); Uncomment from here to line 139 for a demo of my Linked List, Stack, and Queue
-	cout << endl;						or just run AlanParse and trust me that it all works
-	StackDemo();
+{						
+	 /*LinkedListDemo(); 		Uncomment from here to line 139 for a demo of my Linked List, Stack, and Queue
+	cout << endl;		 		or just run AlanParse and trust me that it all works
+	StackDemo();				&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 	cout << endl;
 	QueueDemo(); */
 	AlanParse();
