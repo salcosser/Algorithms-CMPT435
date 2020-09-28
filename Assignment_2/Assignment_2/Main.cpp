@@ -2,9 +2,7 @@
 #include <string>
 #include <fstream>
 #include "Sort.h"
-#include <cassert>
-#include <vector>
-
+#include <algorithm> 
 
 //std::string arr[len];
 //auto *arr = new std::vector<std::string>;
@@ -42,9 +40,16 @@ void setup()
 	newfile.open("magicitems.txt", std::ios::in);
 	if (newfile.is_open())
 	{
-		while (getline(newfile, ln))
-			//arr[cnt++] = ln;
+		while (getline(newfile, ln)) {
+
+			transform(ln.begin(), ln.end(), ln.begin(), ::tolower);
+			//std::cout << ln << std::endl;
 			arr[count++] = ln;
+		}
+		
+			
+
+
 	}
 	newfile.close();
 	return;
@@ -54,6 +59,7 @@ void reset() {
 	for (std::string s : arr) {
 		s = "";
 	}
+	std::cout << "-----------------------Resetting-------------------------" << std::endl;
 }
 
 
@@ -66,14 +72,17 @@ void reset() {
 
 int main() {
 	setup();
-	
 	std::cout << "Insertion sort made " << std::to_string(Sort::Insertion(arr, len)) << " comparisons."<<std::endl;
 	reset();
+
 	setup();
-	//std::cout << "------------------------------pre-----------" << arr->size() << "-------------" << std::endl;
 	std::cout << "Selection sort made " << std::to_string(Sort::Selection(arr, len)) << " comparisons." <<std::endl;
-	
-	//std::cout << arr.at(665) << std::endl;
+	reset();
+
+	setup();
+	int cnt = 0;
+	Sort::mergeSort(arr, 0, (len - 1), cnt);
+	std::cout << "Merge sort made " << std::to_string(cnt) << " comparisons." << std::endl;
 	
 
 
