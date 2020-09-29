@@ -12,4 +12,7 @@ public:
 	static int Selection(std::string s[], int n);
 	static int subMSort(std::string s[], int l, int m, int r, int cnt);
 	static void mergeSort(std::string s[], int lInd, int rInd, int &cnt);
+	static void quickSort(std::string s[], int p, int r, int &cnt);
+	static int Partition(std::string s[], int p, int r, int &cnt);
+
 };

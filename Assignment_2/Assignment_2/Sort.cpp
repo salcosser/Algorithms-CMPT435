@@ -27,6 +27,7 @@ int Sort::Insertion(std::string s[], int n)
 		while (j >= 0 && s[j] > last)
 		{
 			counter++;
+			
 			s[j + 1] = s[j];
 
 			j = j - 1;
@@ -39,7 +40,7 @@ int Sort::Insertion(std::string s[], int n)
 	return counter;
 }
 
-int Sort::Selection(std::string s[], int n)
+int Sort::Selection(std::string s[], int n )
 {
 	int low;
 	int counter = 0;
@@ -48,6 +49,7 @@ int Sort::Selection(std::string s[], int n)
 		low = i;
 		for (int j = i + 1; j < n; j++) {
 			counter++;
+		
 			if (s[j] < s[low]) {
 				low = j;
 			}
@@ -103,11 +105,35 @@ void Sort::mergeSort(std::string s[], int lInd, int rInd ,int &cnt)
 		mergeSort(s, (m + 1), rInd, cnt);
 		
 		cnt += Sort::subMSort(s, lInd, m, rInd, cnt);
-		//std::cout << "counter: " << std::to_string(cnt) << std::endl;
+	
 	}else {
 		//int n = sizeof(*s) / sizeof(s[0]);
 		//printList(s, n);
 		
 	}
 
+}
+
+void Sort::quickSort(std::string s[], int p, int r, int &cnt)
+{
+	if (p < r) {
+		int q = Sort::Partition(s, p, r, cnt);
+		Sort::quickSort(s, p, (q - 1), cnt);
+		Sort::quickSort(s, (q + 1), r, cnt);
+	}
+}
+
+int Sort::Partition(std::string s[], int p, int r, int &cnt)
+{
+	std::string x = s[r];
+	int i = p - 1;
+	for (int j = p; j < (r - 1); j++) {
+		if (s[j] <= x) {
+			i++;
+			cnt++;
+			Sort::swap(s[i], s[j]);
+		}
+	}
+	Sort::swap(s[(i + 1)], s[r]);
+	return ++i;
 }
