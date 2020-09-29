@@ -10,32 +10,7 @@
 
 
 const int len = 666;
-//std::string arr[len];
 
-//void setup()
-//{
-//	std::fstream newfile;
-//
-//	std::string ln;
-//	int count = 0;
-//
-//	newfile.open("magicitems.txt", std::ios::in);
-//	if (newfile.is_open())
-//	{
-//		while (getline(newfile, ln)) {
-//
-//			transform(ln.begin(), ln.end(), ln.begin(), ::tolower);
-//			
-//			arr[count++] = ln;
-//		}
-//		
-//			
-//
-//
-//	}
-//	newfile.close();
-//	return;
-//}
 std::string arr[4][len];
 void setup()
 {
@@ -66,13 +41,6 @@ void setup()
 }
 
 
-//void reset() {
-//	for (std::string s : arr) {
-//		s = "";
-//	}
-//	std::cout << "-----------------------Resetting-------------------------" << std::endl;
-//}
-//
 
 
 
@@ -82,23 +50,34 @@ void setup()
 int main() {
 	setup();
 	std::cout << "Insertion sort made " << std::to_string(Sort::Insertion(arr[0], len)) << " comparisons."<<std::endl;
-	//reset();
 
-	//setup();
 	std::cout << "Selection sort made " << std::to_string(Sort::Selection(arr[1], len)) << " comparisons." <<std::endl;
-	//reset();
 
-	//setup();
 	int cnt = 0;
 	Sort::mergeSort(arr[2], 0, (len - 1), cnt);
 	std::cout << "Merge sort made " << std::to_string(cnt) << " comparisons." << std::endl;
-	//reset();
 
-	//setup();
 	int qCnt = 0;
 	Sort::quickSort(arr[3], 0, (len - 1), qCnt);
 	std::cout << "Quick sort made " << std::to_string(qCnt) << " comparisons." << std::endl;
 	
+
+
+
+
+
+
+
+
+	//Beware, I attempt muli-threading below
+
+
+
+
+
+
+
+
 	//int cnt = 0, qCnt = 0, cnt1 = 0, cnt2 = 0;
 
 
