@@ -48,6 +48,10 @@ int main()
 	std::cout << "Merge sort made " << std::to_string(cnt) << " comparisons." << std::endl;
 
 	int qCnt = 0;
-	Sort::quickSort(arr[3], 0, (len - 1), qCnt);
+	Sort::quickSort(arr[3], 1, len, qCnt);
 	std::cout << "Quick sort made " << std::to_string(qCnt) << " comparisons." << std::endl;
+	/* Sort::printList(arr[0], len); //test Insertion Sort
+	Sort::printList(arr[1], len); //test Selection Sort
+	Sort::printList(arr[2], len); //test Merge Sort
+	Sort::printList(arr[3], len); //test Quick Sort */
 }
