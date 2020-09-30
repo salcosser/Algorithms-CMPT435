@@ -1,7 +1,7 @@
 #include "Sort.h"
 #include <iostream>
 #include <string>
-#include <vector>
+
 #include <algorithm>
 
 void Sort::swap(std::string& a, std::string& b) {

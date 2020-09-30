@@ -12,6 +12,7 @@
 const int len = 666;
 
 std::string arr[4][len];
+//std::string arr[len];
 void setup()
 {
 	for (int i = 0; i < 4; i++) {
@@ -28,6 +29,7 @@ void setup()
 				transform(ln.begin(), ln.end(), ln.begin(), ::tolower);
 
 				arr[i][count++] = ln;
+				//arr[count++] = ln;
 			}
 
 
@@ -40,8 +42,12 @@ void setup()
 	return;
 }
 
-
-
+/* void reset(){
+	for(std::string s : arr){
+		s = "";
+	}
+}
+ */
 
 
 
@@ -56,7 +62,7 @@ int main() {
 	int cnt = 0;
 	Sort::mergeSort(arr[2], 0, (len - 1), cnt);
 	std::cout << "Merge sort made " << std::to_string(cnt) << " comparisons." << std::endl;
-
+	
 	int qCnt = 0;
 	Sort::quickSort(arr[3], 0, (len - 1), qCnt);
 	std::cout << "Quick sort made " << std::to_string(qCnt) << " comparisons." << std::endl;
