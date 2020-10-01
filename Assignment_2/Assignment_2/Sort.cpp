@@ -142,6 +142,8 @@ int Sort::Partition(std::string s[], int p, int r, int &cnt)
 			i++;
 			cnt++;
 			Sort::swap(s[i], s[j]);
+		}else{
+			cnt++;
 		}
 	}
 	Sort::swap(s[(i + 1)], s[r]);

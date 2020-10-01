@@ -460,11 +460,14 @@ int Sort::Partition(std::string s[], int p, int r, int &cnt)
 			i++;
 			cnt++;
 			Sort::swap(s[i], s[j]);
+		}else{
+			cnt++;
 		}
 	}
 	Sort::swap(s[(i + 1)], s[r]);
 	return ++i;
 }
+
 \end{minted}
 \end{small}
 \end{addmargin}
@@ -474,8 +477,8 @@ int Sort::Partition(std::string s[], int p, int r, int &cnt)
     \item variable \texttt{i}, used to point to the last sorted element below the pivot is initialized to \texttt{(p - 1)}(line 4).
     \item begin an for loop with an iterator called \texttt{j}. Initiate \texttt{j} with p and continue until \texttt{(r - 1)} (line 5).
     \item If value \texttt{s[j] <= x}, then increment \texttt{i},  and swap the values \texttt{s[i]} and \texttt{s[j]} (lines 7-12)
-    \item After exiting the for loop, swap \texttt{s[(i + 1)]} and \texttt{s[r]}.(line 14)
-    \item Finally, \texttt{Partition} returns \texttt{i} after incrementing it one final time. With this, the \texttt{Partition} function returns the new pivot index (line 15).
+    \item After exiting the for loop, swap \texttt{s[(i + 1)]} and \texttt{s[r]}.(line 16)
+    \item Finally, \texttt{Partition} returns \texttt{i} after incrementing it one final time. With this, the \texttt{Partition} function returns the new pivot index (line 17).
     \end{enumerate}
 
 
@@ -566,13 +569,13 @@ Finally, the results tell the real story. It is clear to see that the recursion 
  \hline
  Merge Sort& 5445 \\
  \hline
- Quick Sort& 3189 \\ [1ex] 
+ Quick Sort& 7155 \\ [1ex] 
  \hline
 \end{tabular}
 }
 \end{center}
 
-Another interesting metric is to compare the total lines of code per algorithm (in C++) compared to their number of comparisons.
+Another interesting metric is to compare the total lines of code per algorithm (in C++) compared to their number of comparisons. It should be noted that in this instance quick sort is less efficient than merge sort. This is truly down to the way that the pivot index is chosen. If the index was chosen at random, or some other way, the algorithm may be more efficient.
 
 
 \begin{center}
@@ -591,9 +594,9 @@ Another interesting metric is to compare the total lines of code per algorithm (
                          Merge Sort, Quick Sort},
   ]
    \addplot coordinates { (114309,Insertion Sort) (221445,Selection Sort)
-           (5445,Merge Sort) (3189,Quick Sort) };
+           (5445,Merge Sort) (7155,Quick Sort) };
             \addplot coordinates { (22,Insertion Sort) (26,Selection Sort)
-           (52,Merge Sort) (24,Quick Sort)  };
+           (52,Merge Sort) (26,Quick Sort)  };
              \legend{Comparisons, Lines of code}
                \end{axis}
                
