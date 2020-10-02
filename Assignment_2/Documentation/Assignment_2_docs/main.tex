@@ -372,11 +372,18 @@ int Sort::subMSort(std::string s[], int l, int m, int r, int cnt)
 	}
 	int i = 0, j = 0;
 	int k = l;
-	while (i < len1 && j < len2)
+	while (i < len1 && j < len2) 
 	{
-
-		counter++;
-		s[k++] = (left[i] < right[j]) ? left[i++] : right[j++];
+		if (left[i] < right[j])
+		{
+			s[k++] = left[i++];
+			counter++;
+		}
+		else
+		{
+			s[k++] = right[j++];
+			counter++;
+		}
 	}
 	while (i < len1)
 	{
@@ -397,10 +404,10 @@ int Sort::subMSort(std::string s[], int l, int m, int r, int cnt)
     \item Allocate space for the left side of the given portion of the array with the correct size (lines 4, 7).
     \item Allocate space for the right size of the given portion of the array with the correct size (lines 5, 8).
     \item Put the first half of the items in the given portion of the array to the \texttt{left} array, and the second half to the \texttt{right} array (lines 10-17)
-    \item Set index counter \texttt{i} for the \texttt{left} array and \texttt{j} for the \texttt{right} array, both at 0. also set an index counter for the actual array as \texttt{k}, initiated with \texttt{l}, the left bound index for the array.
-    \item Compare both the \texttt{left} and \texttt{right} arrays by index starting 0, whichever value at the current index is larger, place that value at the next index in the main array \texttt{s[]}. Increment the index counter on the sub array that the value was pulled from, as well as the index counter for the whole main array. This way, the sorting can continue (line 24).
+    \item Set index counter \texttt{i} for the \texttt{left} array and \texttt{j} for the \texttt{right} array, both at 0. also set an index counter for the actual array as \texttt{k}, initiated with \texttt{l}, the left bound index for the array.(lines 18-19)
+    \item Compare both the \texttt{left} and \texttt{right} arrays by index starting 0, whichever value at the current index is larger, place that value at the next index in the main array \texttt{s[]}. Increment the index counter on the sub array that the value was pulled from, as well as the index counter for the whole main array. This way, the sorting can continue (lines 20-32).
     \item Continue comparing until the end of either sub array is reached (line 20).
-    \item At this point, append the remaining unsorted items after the last sorted index of \texttt{s[]} (lines 26-34).
+    \item At this point, append the remaining unsorted items after the last sorted index of \texttt{s[]} (lines 33-40).
     
    
 \end{enumerate}
@@ -555,7 +562,8 @@ The first to algorithms, insertion sort and selection sort, have nothing notable
 
 \section{Conclusion: The Results}
 
-Finally, the results tell the real story. It is clear to see that the recursion helped to make Merge Sort and Quick Sort considerably faster. Although in the real world, this does not make much of a difference. On my personal laptop, a moderatley powerful machine, I clocked the whole program to run in just around 30 milliseconds.
+Finally, the results tell the real story. It is clear to see that the recursion helped to make Merge Sort and Quick Sort considerably faster. This is easy to understand as both functions operate with $O((n)log(n))$ complexity. Logarithmic algorithms are much quicker already, as logarithms grow very slowly.
+Compared to Selection sort and Insertion sort, their complexity of $O(n^2)$ stands no chance when it comes to speed. Although in the real world, this does not make much of a difference. On my personal laptop, a moderately powerful machine, I clocked the whole program to run in just around 30 milliseconds.
 
 \begin{center}
 {\rowcolors{2}{gray!50}{white!100}
@@ -575,33 +583,7 @@ Finally, the results tell the real story. It is clear to see that the recursion 
 }
 \end{center}
 
-Another interesting metric is to compare the total lines of code per algorithm (in C++) compared to their number of comparisons. It should be noted that in this instance quick sort is less efficient than merge sort. This is truly down to the way that the pivot index is chosen. If the index was chosen at random, or some other way, the algorithm may be more efficient.
 
-
-\begin{center}
-\begin{tikzpicture}
- \begin{axis}
-[
-    title    = Complexity of Sorting Algorithms For 666 Items,
-    xbar,
-    y axis line style = { opacity = 0 },
-    axis x line       = none,
-    tickwidth         = 0pt,
-    enlarge y limits  = 0.2,
-    enlarge x limits  = 0.02,
-    nodes near coords,
-    symbolic y coords = {Insertion Sort, Selection Sort,
-                         Merge Sort, Quick Sort},
-  ]
-   \addplot coordinates { (114309,Insertion Sort) (221445,Selection Sort)
-           (5445,Merge Sort) (7155,Quick Sort) };
-            \addplot coordinates { (22,Insertion Sort) (26,Selection Sort)
-           (52,Merge Sort) (26,Quick Sort)  };
-             \legend{Comparisons, Lines of code}
-               \end{axis}
-               
-\end{tikzpicture}
-\end{center}
 \newpage
 \textbf{Closing Thoughts}
 
@@ -626,8 +608,37 @@ Quick Sort, GeeksforGeeks, 4 Sept. 2020, www.geeksforgeeks.org/quick-sort/?ref=l
 
 Selection Sort Algorithm, Top Sites, www.thetopsites.net/article/51681938.shtml. 
 \end{lstlisting}
+
 \textit{Used for Graphics and quotes}
 \end{small}
+\vspace{4em}
 
+Another interesting metric is to compare the total lines of code per algorithm (in C++) compared to their number of comparisons. It should be noted that in this instance quick sort is less efficient than merge sort. This is truly down to the way that the pivot index is chosen. If the index was chosen at random, or some other way, the algorithm may be more efficient. 
+
+
+\begin{center}
+\begin{tikzpicture}
+ \begin{axis}
+[
+    title    = Complexity of Sorting Algorithms For 666 Items,
+    xbar,
+    y axis line style = { opacity = 0 },
+    axis x line       = none,
+    tickwidth         = 0pt,
+    enlarge y limits  = 0.2,
+    enlarge x limits  = 0.02,
+    nodes near coords,
+    symbolic y coords = {Insertion Sort, Selection Sort,
+                         Merge Sort, Quick Sort},
+  ]
+   \addplot coordinates { (114309,Insertion Sort) (221445,Selection Sort)
+           (5445,Merge Sort) (7155,Quick Sort) };
+            \addplot coordinates { (22,Insertion Sort) (26,Selection Sort)
+           (59,Merge Sort) (26,Quick Sort)  };
+             \legend{Comparisons, Lines of code}
+               \end{axis}
+               
+\end{tikzpicture}
+\end{center}
 
 \end{document}
