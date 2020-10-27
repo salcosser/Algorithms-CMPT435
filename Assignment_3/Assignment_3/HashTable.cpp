@@ -27,7 +27,6 @@ void HashTable::visualize()
 	std::cout << "---visualizing your data---" << std::endl;
 
 	for (int i = 0; i < HASH_TABLE_SIZE; i++) {	//getting the data
-	
 		if (table[i].head == nullptr)
 		{
 			std::cout << i << "|" << std::endl;
@@ -43,10 +42,39 @@ void HashTable::visualize()
 				std::cout << "*";
 				start = start->next;
 			}
+			
 			std::cout << std::endl;
 		}
 	}
-	
-
-
 }
+int HashTable::getHashed(std::string items[], int chosenLen) {
+	int tCount = 0;
+
+	for (int i = 0; i < chosenLen; i++) {
+		int count = 0;
+
+		int hashLoc = getHash(items[i]);
+		Queue chain = table[hashLoc];
+			
+		Node  *n = chain.head;
+			std::cout << n->data << std::endl;
+			if (n->data == "")
+			{
+				std::cout << "If you're seeing this, the list is empty." << std::endl;
+				
+			}
+			else
+			{
+				while (n->data != items[i])
+				{
+					count++;
+					n = n->next;
+				}
+				std::cout << "Found it at place " << ++count << " in the chain." << std::endl;
+				tCount += count;
+
+			}
+		}
+	return tCount;
+	}
+	

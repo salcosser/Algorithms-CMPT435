@@ -7,5 +7,6 @@ public:
 	Queue table[HASH_TABLE_SIZE];
 	static int getHash(std::string item);
 	void placeHashed(std::string item);
+	int getHashed(std::string items[], int chosenLen);
 	void visualize();
 };

@@ -35,13 +35,13 @@ void setup()
 	return;
 }
 
-void HashTheTable(std::string arr[], int len) {
-	HashTable* tab = new HashTable();
+void HashTheTable(std::string arr[], int len, HashTable tab) {
+
 	
 	for (int i = 0; i < len; i++) {
-		tab->placeHashed(arr[i]);
+		tab.placeHashed(arr[i]);
 	}
-	tab->visualize();
+	tab.visualize();
 }
 
 
@@ -59,6 +59,9 @@ int main()
 	int binAvg = Search::binSearch(arr, len, items, 42);
 	std::cout << "Linear Search:||: Average comparisons before a hit: " << linAvg << std::endl;
 	std::cout << "Binary Search:||: Average comarisons before a hit: " << binAvg  << std::endl;
-	HashTheTable(arr, len);
+	HashTable* tab = new HashTable();
+	HashTheTable(arr, len, *tab);
+	tab->getHashed(items, chosenLen);
+
 	
 }
