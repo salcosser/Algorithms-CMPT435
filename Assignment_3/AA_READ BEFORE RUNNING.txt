@@ -1,0 +1,7 @@
+when using ./launch to run the project, please instead use:
+./launch > output.txt
+
+as there is a large amount of text that will be outputted, and looking at a text file would be more reliable.
+
+Thanks, 
+-Sam Alcosser

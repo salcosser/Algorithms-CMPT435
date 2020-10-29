@@ -34,15 +34,18 @@ void setup()
 	Sort::mergeSort(arr, 0, (len - 1));
 	return;
 }
+// loading the table up is done outside of the class itself for a reason.
+// In the real world, this hash table would simply exist, and the loading process would most likely not happen all at once.
+// Either way, the instantiation of the hash table and the process of loading it would undeniably take place at different times
 
-void HashTheTable(std::string arr[], int len, HashTable tab) {
-
+ void HashTheTable(std::string arr[], int len, HashTable * tab) { 
+ 	//HashTable* tab = new HashTable();
+ 	for (int i = 0; i < len; i++) {
+ 		tab->placeHashed(arr[i]);
+ 	}
+ 	tab->visualize();
 	
-	for (int i = 0; i < len; i++) {
-		tab.placeHashed(arr[i]);
-	}
-	tab.visualize();
-}
+ }
 
 
 int main()
@@ -57,11 +60,10 @@ int main()
 	Search::randPick(arr, items,len,  42);
 	int linAvg = Search::linSearch(arr, len, items, chosenLen);
 	int binAvg = Search::binSearch(arr, len, items, 42);
-	std::cout << "Linear Search:||: Average comparisons before a hit: " << linAvg << std::endl;
-	std::cout << "Binary Search:||: Average comarisons before a hit: " << binAvg  << std::endl;
-	HashTable* tab = new HashTable();
-	HashTheTable(arr, len, *tab);
-	tab->getHashed(items, chosenLen);
-
-	
+	std::cout << "Linear Search:||: Average comparisons to get a hit: " << linAvg << std::endl;
+	std::cout << "Binary Search:||: Average comparisons to get a hit: " << binAvg  << std::endl;
+	HashTable * hTable = new HashTable();
+	HashTheTable(arr, len, hTable);
+	int tCount = hTable->getHashed(items, chosenLen);
+	std::cout << "Average " << tCount << " comparisons to retrieve each item." << std::endl; 
 }

@@ -1,0 +1,383 @@
+---Linear Search---
+Found it at index 49 after 49 checks.
+Found it at index 631 after 631 checks.
+Found it at index 499 after 499 checks.
+Found it at index 347 after 347 checks.
+Found it at index 97 after 97 checks.
+Found it at index 219 after 219 checks.
+Found it at index 435 after 435 checks.
+Found it at index 271 after 271 checks.
+Found it at index 560 after 560 checks.
+Found it at index 21 after 21 checks.
+Found it at index 36 after 36 checks.
+Found it at index 372 after 372 checks.
+Found it at index 276 after 276 checks.
+Found it at index 343 after 343 checks.
+Found it at index 432 after 432 checks.
+Found it at index 509 after 509 checks.
+Found it at index 12 after 12 checks.
+Found it at index 440 after 440 checks.
+Found it at index 147 after 147 checks.
+Found it at index 117 after 117 checks.
+Found it at index 148 after 148 checks.
+Found it at index 183 after 183 checks.
+Found it at index 152 after 152 checks.
+Found it at index 99 after 99 checks.
+Found it at index 246 after 246 checks.
+Found it at index 359 after 359 checks.
+Found it at index 164 after 164 checks.
+Found it at index 367 after 367 checks.
+Found it at index 417 after 417 checks.
+Found it at index 205 after 205 checks.
+Found it at index 83 after 83 checks.
+Found it at index 411 after 411 checks.
+Found it at index 496 after 496 checks.
+Found it at index 610 after 610 checks.
+Found it at index 404 after 404 checks.
+Found it at index 89 after 89 checks.
+Found it at index 511 after 511 checks.
+Found it at index 293 after 293 checks.
+Found it at index 209 after 209 checks.
+Found it at index 408 after 408 checks.
+Found it at index 640 after 640 checks.
+Found it at index 9 after 9 checks.
+---Binary Search---
+found it at index 51 after 9 tries.
+found it at index 634 after 8 tries.
+found it at index 666 after 2 tries.
+found it at index 348 after 10 tries.
+found it at index 98 after 10 tries.
+found it at index 222 after 8 tries.
+found it at index 436 after 10 tries.
+found it at index 272 after 9 tries.
+found it at index 561 after 10 tries.
+found it at index 22 after 9 tries.
+found it at index 38 after 9 tries.
+found it at index 374 after 9 tries.
+found it at index 277 after 9 tries.
+found it at index 353 after 6 tries.
+found it at index 433 after 9 tries.
+found it at index 519 after 6 tries.
+found it at index 15 after 8 tries.
+found it at index 441 after 10 tries.
+found it at index 150 after 8 tries.
+found it at index 118 after 10 tries.
+found it at index 150 after 9 tries.
+found it at index 186 after 8 tries.
+found it at index 155 after 8 tries.
+found it at index 100 after 9 tries.
+found it at index 249 after 8 tries.
+found it at index 360 after 9 tries.
+found it at index 166 after 9 tries.
+found it at index 368 after 10 tries.
+found it at index 418 after 9 tries.
+found it at index 207 after 9 tries.
+found it at index 166 after 3 tries.
+found it at index 413 after 9 tries.
+found it at index 499 after 8 tries.
+found it at index 613 after 8 tries.
+found it at index 405 after 10 tries.
+found it at index 90 after 9 tries.
+found it at index 514 after 8 tries.
+found it at index 296 after 8 tries.
+found it at index 212 after 8 tries.
+found it at index 410 after 9 tries.
+found it at index 642 after 9 tries.
+found it at index 10 after 10 tries.
+Linear Search:||: Average comparisons to get a hit: 294
+Binary Search:||: Average comparisons to get a hit: 8
+---visualizing your data---
+0|***
+1|**
+2|***
+3|*****
+4|***
+5|***
+6|***
+7|*
+8|***
+9|*
+10|**
+11|**
+12|***
+13|**
+14|***
+15|
+16|****
+17|*****
+18|***
+19|***
+20|*
+21|****
+22|**
+23|**
+24|
+25|*****
+26|*
+27|**
+28|***
+29|*
+30|***
+31|
+32|*******
+33|***
+34|***
+35|*
+36|*****
+37|****
+38|*
+39|*****
+40|*
+41|***
+42|*
+43|
+44|**
+45|**
+46|*
+47|*******
+48|*
+49|*****
+50|*
+51|*
+52|**
+53|*
+54|*******
+55|***
+56|*****
+57|*****
+58|*
+59|**
+60|***
+61|
+62|**
+63|
+64|******
+65|****
+66|***
+67|**
+68|**
+69|**
+70|*
+71|***
+72|
+73|**
+74|**
+75|**
+76|*****
+77|*
+78|***
+79|**
+80|*
+81|***
+82|*
+83|**
+84|*
+85|
+86|*
+87|***
+88|**
+89|**
+90|****
+91|**
+92|
+93|***
+94|****
+95|***
+96|**
+97|***
+98|*****
+99|****
+100|*****
+101|*****
+102|**
+103|**
+104|****
+105|*
+106|
+107|**
+108|*
+109|*
+110|****
+111|**
+112|*****
+113|**
+114|******
+115|**
+116|**
+117|*****
+118|***
+119|****
+120|***
+121|***
+122|****
+123|***
+124|**
+125|******
+126|*
+127|***
+128|
+129|**
+130|**********
+131|**
+132|**
+133|
+134|**
+135|
+136|***
+137|***
+138|**
+139|**
+140|***
+141|*
+142|***
+143|***
+144|****
+145|**
+146|*
+147|****
+148|***
+149|***
+150|***
+151|*****
+152|****
+153|***
+154|****
+155|**
+156|*****
+157|**
+158|****
+159|***
+160|
+161|**
+162|***
+163|*****
+164|***
+165|***
+166|*
+167|******
+168|***
+169|*****
+170|*
+171|****
+172|
+173|*
+174|****
+175|*****
+176|**
+177|****
+178|*
+179|***
+180|*
+181|
+182|*
+183|**
+184|****
+185|**
+186|
+187|****
+188|**
+189|*
+190|*
+191|***
+192|***
+193|****
+194|
+195|**
+196|****
+197|******
+198|****
+199|**
+200|***
+201|**
+202|**
+203|*****
+204|****
+205|*
+206|**
+207|***
+208|**
+209|******
+210|***
+211|**
+212|**
+213|**
+214|*****
+215|***
+216|*****
+217|*******
+218|**
+219|****
+220|**
+221|******
+222|**
+223|**
+224|*
+225|**
+226|***
+227|***
+228|*
+229|***
+230|**
+231|****
+232|**
+233|*
+234|*******
+235|***
+236|
+237|***
+238|*****
+239|***
+240|**
+241|**
+242|
+243|*
+244|**
+245|*****
+246|
+247|****
+248|**
+249|****
+--Retrieving hashed Data--
+Found it at place 1 in the chain.
+Found it at place 5 in the chain.
+Found it at place 4 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 1 in the chain.
+Found it at place 3 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 4 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 1 in the chain.
+Found it at place 1 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 3 in the chain.
+Found it at place 1 in the chain.
+Found it at place 1 in the chain.
+Found it at place 4 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 3 in the chain.
+Found it at place 5 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Found it at place 2 in the chain.
+Found it at place 2 in the chain.
+Found it at place 1 in the chain.
+Average 1 comparisons to retrieve each item.

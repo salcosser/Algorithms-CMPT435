@@ -56,7 +56,7 @@ void  Search::randPick(std::string mainArr[], std::string chosen[], int len,  in
 
 int Search::linSearch(std::string mainArr[],int len, std::string chosen[], int lenOfChosen)
 {
-	
+	std::cout << "---Linear Search---"<<std::endl;
 	int tCount = 0;
 	
 	for (int i = 0; i < lenOfChosen; i++) {
@@ -82,7 +82,7 @@ int Search::linSearch(std::string mainArr[],int len, std::string chosen[], int l
 
 int Search::binSearch(std::string mainArr[], int len, std::string chosen[], int lenOfChosen)
 {
-
+	std::cout << "---Binary Search---" << std::endl;
 	int tCount = 0;
 	
 	for (int x = 0; x < lenOfChosen; x++) {
