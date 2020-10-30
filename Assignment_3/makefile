@@ -19,3 +19,4 @@ HashTable.o: HashTable.cpp HashTable.h
 
 clean:
 	rm *.o launch
+	

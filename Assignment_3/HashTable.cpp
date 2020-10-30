@@ -34,7 +34,7 @@ void HashTable::visualize()
 		{
 			std::cout << i << "|" << std::endl;
 
-			continue;
+			
 		}
 		else
 		{
