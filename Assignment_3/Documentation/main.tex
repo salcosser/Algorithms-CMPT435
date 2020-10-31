@@ -93,15 +93,15 @@ This document explains the implementations of linear search, binary search, and 
 
 \section{the \texttt{randPick()} Function}
 
-Most of the algorithms used in this program are reliant on the \texttt{randPick()} function, the routine used to generate the list of random elements.
+Most of the algorithms used in this program are reliant on the \texttt{randPick()} function, the routine used to generate the list of random elements. 
 
-\begin{center}
-\textbf{Code Analysis}
-\end{center}
+All that the function does is for the length of the array of elements to be chosen (line 6), generate a random number (lines 9-11), and grab the element at that index in the main array and put it in the list of random elements (lines 13-15).
+
+
 \begin{addmargin}[-5em]{1em}
 \begin{small}
 \begin{minted}[linenos=true]{cpp}
-oid Search::randPick(std::string mainArr[], std::string chosen[], int len, int lenOfChosen)
+void Search::randPick(std::string mainArr[], std::string chosen[], int len, int lenOfChosen)
 {
 
 	int countTries = 0;
@@ -109,63 +109,20 @@ oid Search::randPick(std::string mainArr[], std::string chosen[], int len, int l
 	for (int i = 0; i < lenOfChosen; i++)
 	{
 
-		bool same = true;
-		while (same)
-		{
-			std::random_device dev; 
-			std::mt19937 rng(dev());
-			std::uniform_int_distribution<std::mt19937::result_type> dist6(0, len);
+		std::random_device dev; //making the random number
+		std::mt19937 rng(dev());
+		std::uniform_int_distribution<std::mt19937::result_type> dist6(0, len);
 
-			std::string attempt = mainArr[dist6(rng)];
-		
-			bool foundSame = false;
-			for (int j = 0; j < lenOfChosen; j++)	
-			{
+		std::string attempt = mainArr[dist6(rng)];
 
-				if (chosen[j] == attempt)	
-
-				{
-
-					countTries++;
-					foundSame = true;
-					break;
-				}
-			}
-
-			if (foundSame)
-			{
-
-				countTries++;	
-				continue;
-			}
-
-			else
-			{
-
-				countTries++;
-				chosen[i] = attempt;		
-				same = false;
-			}
-		}
+		chosen[i] = attempt; //if there were no matches, then add it to the list
 	}
-
-	return;
 }
 
 \end{minted}
 \end{small}
 \end{addmargin}
 
-\begin{enumerate}
-    \item Begin a loop that will run an amount of times defined by the \texttt{lenOfChosen} variable, as was passed to the function.(line 6)
-    \item After initializing a boolean variable called \texttt{same} to true, start a while loop that will complete once the variable is set to false. This will allow us to continue trying to generate random elements until an original element is found.(lines 9,10)
-    \item Generate a random number between 0 and the length of the main array as defined by the \texttt{len} variable that was passed into the function. Retrieve the element at that index from array \texttt{mainArr[]}(lines 12-14).
-    \item Set  a flag variable called \texttt{foundSame} to false.( line 18)
-    \item Check if the element selected exists in the list of already chosen elements by looping through and checking each element with a loop.(lines 19-22)
-    \item If the current element matches a previous one, set the \texttt{foundSame} flag, and break out of the for loop. With this the algorithm will stop the search.(lines 26-28)
-    \item If the \texttt{foundSame} flag was set, reset the while loop and try generating a new number all over again.(lines 32-37)
-    \item If there was not a same element, add that new item to the list of items and set the \texttt{same} flag to false. Now, the function will break out of the outer while loop.(lines 39-45)
-\end{enumerate}
 
 
 \section{Searching}
@@ -330,7 +287,7 @@ int Search::binSearch(std::string mainArr[], int len, std::string chosen[], int 
 
 
 
-It is clear that binary search is a more efficient algorithm than linear search. The key reason being that linear search is a brute force algorithm with complexity of $O(n)$, while binary search is a more complicated yet more efficient algorithm with complexity of $O(log_2(n))$. Linear search simply is checking every single item until it finds a match. The time it takes to find that item is somewhat random. For this reason, with a set size of 666 items, we can expect that on average it will take 333 tries  to get the right item, which is incredibly close to the actual result.
+It is clear that binary search is a more efficient algorithm than linear search. The key reason being that linear search is a brute force algorithm with complexity of $O(n)$, while binary search is a more complicated yet more efficient algorithm with complexity of $O(log_2(n))$. Linear search simply is checking every single item until it finds a match. The time it takes to find that item is somewhat random. For this reason, with a set size of 666 items, we can expect that on average it will take 333 tries  to get the right item, which is incredibly close to the actual result One could argue that this would mean the running time would be $O(1/2n)$, but since $1/2$ is a constant, the actual complexity is just $O(n)$.
 
 Binary search, however, is very stable. The reason being that, the only processing being done, is splitting the set into smaller and smaller pieces until it is small enough to know exactly where the item is. This splitting process is what gives Binary Search it's $O(log_2(n))$ complexity (see figure 3). 
 
