@@ -17,6 +17,7 @@ BinNode BinTree::search(BinNode * rNode, std::string key, int &count){
 }
 
 
+
 void BinTree::insert(std::string key){
    BinNode * node = new BinNode();
     node->key = key;

@@ -6,13 +6,15 @@
 #include <cmath>
 #include <random>
 #include "BinTree.h"
-
+#include "GraphManager.h"
 using namespace std;
 
-const int LEN = 666; //finishes in ~15 - 35 ms
+const int MAGIC_LEN = 666; //finishes in ~15 - 35 ms
 const int CHOSEN_LEN = 42;
-std::string arr[LEN];	
-void setup()
+std::string arr[MAGIC_LEN];	
+
+
+void setupMagic()
 {
 	
 		std::fstream newfile;
@@ -36,6 +38,16 @@ void setup()
 	
 	return;
 }
+
+
+
+
+
+
+
+
+
+
 void populateTree(BinTree * tree, std::string arr[], int arrLen){
     for(int i = 0; i<arrLen;i++){
    
@@ -62,14 +74,17 @@ void randPick(std::string mainArr[], std::string chosen[], int len, int lenOfCho
 	}
 }
 int main(){
-	setup();
+	setupMagic();
     BinTree * tree = new BinTree();
-    populateTree(tree, arr, LEN);
+    populateTree(tree, arr, MAGIC_LEN);
 	string randItems[CHOSEN_LEN];
-	randPick(arr, randItems, LEN, CHOSEN_LEN);
+	randPick(arr, randItems, MAGIC_LEN, CHOSEN_LEN);
 	// for(string s : randItems){
 	// 	cout << s << endl;
 	// }
 	tree->pullBatch(randItems, CHOSEN_LEN);
+	GraphManager * gm = new GraphManager();
+	gm->Overlord("graphs1.txt");
+
 
 }
