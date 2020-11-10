@@ -6,7 +6,7 @@
 #include <vector>
 #include <iterator>
 #include "GraphManager.h"
-#include "gNode.h"
+#include "Vertex.h"
 
 void GraphManager::Overlord(std::string fileName)
 {
@@ -36,7 +36,7 @@ void GraphManager::Overlord(std::string fileName)
 			else if (ln.find("add vertex") != std::string::npos)
 			{
 				int id = std::stoi(ln.substr(11));
-				gNode *vertex = new gNode();
+				Vertex *vertex = new Vertex();
 				vertex->id = id;
 				linkedVect.push_back(*vertex);
 				std::cout << "vertex made" << std::endl;

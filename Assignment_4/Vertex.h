@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-class gNode{
+class Vertex{
     public:
     int id;
     bool processed;

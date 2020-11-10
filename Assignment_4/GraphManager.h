@@ -3,11 +3,11 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "gNode.h"
+#include "Vertex.h"
 class GraphManager{
     public:
     static const int MAX_V = 100;
-    std::vector<gNode> linkedVect;
+    std::vector<Vertex> linkedVect;
     void Overlord(std::string fileName);
     
     
