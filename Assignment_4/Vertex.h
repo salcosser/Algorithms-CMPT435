@@ -5,5 +5,5 @@ class Vertex{
     public:
     int id;
     bool processed;
-    std::vector<int> neighbors;
+    std::vector<Vertex*> neighbors;
 };
