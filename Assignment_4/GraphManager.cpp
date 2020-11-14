@@ -7,7 +7,8 @@
 #include <iterator>
 #include "GraphManager.h"
 #include "Vertex.h"
-
+#include "Queue.h"
+#include "Node.h"
 void GraphManager::Overlord(std::string fileName)
 {
 
@@ -30,6 +31,10 @@ void GraphManager::Overlord(std::string fileName)
 					std::cout << "got to the printing" << std::endl;
 					printAJList();
 					printMatrix();
+					BFSearch(linkedVect[0]);
+					resetVList();
+					std::cout << "Printing elements as seen through Depth First Search" <<std::endl;
+					DFSearch(linkedVect[0]);
 					linkedVect.clear();
 				}
 				started = true;
@@ -106,13 +111,12 @@ void GraphManager::printMatrix()
 	{
 		if (linkedVect[n]->id < 10)
 		{
-			std::cout << linkedVect[n]->id  << "  ";
+			std::cout << linkedVect[n]->id << "  ";
 		}
 		else
 		{
-			std::cout << linkedVect[n]->id  << " ";
+			std::cout << linkedVect[n]->id << " ";
 		}
-
 	}
 	std::cout << std::endl;
 
@@ -133,5 +137,51 @@ void GraphManager::printMatrix()
 			std::cout << matrix[i][h] << "  ";
 		}
 		std::cout << std::endl;
+	}
+}
+
+void GraphManager::resetVList()
+{
+	for (int i = 0; i < linkedVect.size(); i++)
+	{
+		linkedVect[i]->processed = false;
+	}
+}
+void GraphManager::BFSearch(Vertex *startV)
+{	
+	std::cout << "Printing elements as seen through Breadth First Search" <<std::endl;
+	Queue q = Queue();
+	q.enQueue(startV);
+	startV->processed = true;
+	while (!q.isEmpty())
+	{
+		Vertex *cv = q.deQueue().data;
+		std::cout << cv->id << std::endl;
+		for (int i = 0; i < cv->neighbors.size(); i++)
+		{
+			if (!cv->neighbors[i]->processed)
+			{
+				q.enQueue(cv->neighbors[i]);
+				cv->neighbors[i]->processed = true;
+			}
+		}
+	}
+	std::cout << "------------------------------"<< std::endl;
+}
+
+void GraphManager::DFSearch(Vertex *startV)
+{
+	
+	if (!startV->processed)
+	{
+		std::cout << startV->id << std::endl;
+		startV->processed = true;
+	}
+	for (int i = 0; i < startV->neighbors.size(); i++)
+	{
+		if (!startV->neighbors[i]->processed)
+		{
+			DFSearch(startV->neighbors[i]);
+		}
 	}
 }

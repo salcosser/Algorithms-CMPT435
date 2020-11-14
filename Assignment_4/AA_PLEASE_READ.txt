@@ -1,0 +1,6 @@
+When running this, make sure to maximize your console/terminal window before running. 
+In order to display all of the data in the matrices, I needed to add spacing so that
+the column headings are readable, so you need to give space for it to print.
+
+Thanks!
+-Sam Alcosser
