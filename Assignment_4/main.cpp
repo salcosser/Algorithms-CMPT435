@@ -74,20 +74,13 @@ void randPick(std::string mainArr[], std::string chosen[], int len, int lenOfCho
 	}
 }
 int main(){
-	// setupMagic();
-    // BinTree * tree = new BinTree();
-    // populateTree(tree, arr, MAGIC_LEN);
-	// string randItems[CHOSEN_LEN];
-	// randPick(arr, randItems, MAGIC_LEN, CHOSEN_LEN);
-	// // for(string s : randItems){
-	// // 	cout << s << endl;
-	// // }
-	// tree->pullBatch(randItems, CHOSEN_LEN);
+	setupMagic();	//magic items
+    BinTree * tree = new BinTree();
+    populateTree(tree, arr, MAGIC_LEN);	//setup the tree
+	string randItems[CHOSEN_LEN];
+	randPick(arr, randItems, MAGIC_LEN, CHOSEN_LEN);	//setup random items
+	tree->pullBatch(randItems, CHOSEN_LEN);	// pull all of the random items out
 	GraphManager * gm = new GraphManager();
-	gm->Overlord("graphs1.txt");
-	
-	
-	
+	gm->Overlord("graphs1.txt");		//create the graph and process it
 	return 0;
-
 }

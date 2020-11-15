@@ -3,7 +3,7 @@
 #include <vector>
 class Vertex{
     public:
-    int id;
-    bool processed;
-    std::vector<Vertex*> neighbors;
+    int id;     //id of the vertex
+    bool processed;     //used for searching
+    std::vector<Vertex*> neighbors;     //all of the one hop neighbors
 };

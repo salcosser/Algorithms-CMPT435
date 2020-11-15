@@ -5,6 +5,6 @@ class BinNode
 public:
 	std::string key; // stores data for the node
 	BinNode* left = nullptr;		  // stores pointer for the node
-    BinNode* right = nullptr;
+    BinNode* right = nullptr;			//left and right pointers
 	BinNode* parent = nullptr;
 };
