@@ -8,9 +8,9 @@ class PooledTesting{
     int activeCases = 0;
     int testCounter = 0;
     void runTests(int sPoolIndex, int iStart, int iEnd);
-    void setupPools(int size, int pcPositive);
+    void setupPools(double size, double pcPos);
     bool test(int sPoolIndex, int iStart, int iEnd);
-    void testThePools(int sampleSize,  int perCent);
+    void testThePools(int sampleSize,  double perCent);
     std::vector<std::vector<int>> testPools;
 
 };

@@ -8,12 +8,14 @@
 #include <vector>
 #include "PooledTesting.h"
 
-void PooledTesting::setupPools(int size, int pcPos)
+void PooledTesting::setupPools(double size, double pcPos)
 {
+   
     tPeople = size;
-    std::vector<bool> population(tPeople, 0);
-    int numPos = (int)(tPeople * (pcPos * .01));
+    std::vector<int> population(tPeople, 0);
+    int numPos = (int)(static_cast<double>(tPeople) * pcPos);
 
+    
     std::vector<int> indexes;
     int chosen = 0;
     while (chosen < numPos)
@@ -29,7 +31,7 @@ void PooledTesting::setupPools(int size, int pcPos)
         }
         else
         {
-            //  std::cout << attempt << std::endl;
+            
             indexes.push_back(attempt);
             population[attempt] = 1;
             chosen++;
@@ -84,7 +86,7 @@ bool PooledTesting::test(int sPoolIndex, int iStart, int iEnd)
                 std::cout << "O ";
             }
         }
-        //testCounter++;
+       
         std::cout << std::endl;
         std::cout << " 'X's denote positive cases, 'O's denote negative cases." << std::endl;
     }
@@ -94,8 +96,8 @@ bool PooledTesting::test(int sPoolIndex, int iStart, int iEnd)
         {
             activeCases++;
             foundCase = true;
-            //++testCounter;
-            std::cout << "ALERT: a conclusive case was found." << std::endl;
+            
+            std::cout << "ALERT: a conclusive case was found. in pool #" << sPoolIndex << " index " << iStart << std::endl;
         }
     }
     std::cout << "------------"
@@ -106,15 +108,12 @@ bool PooledTesting::test(int sPoolIndex, int iStart, int iEnd)
 void PooledTesting::runTests(int sPoolIndex, int iStart, int iEnd)
 {
     int mid = (iStart + iEnd) / 2;
-    int quart = mid / 2;
 
     bool tCaseA = test(sPoolIndex, iStart, mid);
     bool tCaseB = test(sPoolIndex, mid, iEnd);
 
-    if (tCaseA && ((mid - iStart) <= 1))
-    {
-    }
-    else if (tCaseA)
+   
+    if (tCaseA && ((mid - iStart) > 1))
     {
         runTests(sPoolIndex, iStart, mid);
     }
@@ -123,10 +122,7 @@ void PooledTesting::runTests(int sPoolIndex, int iStart, int iEnd)
         std::cout << "Pool #" << sPoolIndex << " persons " << iStart << " - " << (mid + 1) << " have been cleared." << std::endl;
     }
 
-    if (tCaseB && ((iEnd - mid) <= 1))
-    {
-    }
-    else if (tCaseB)
+    if (tCaseB && ((iEnd - mid) > 1))
     {
         runTests(sPoolIndex, mid, iEnd);
     }
@@ -136,7 +132,7 @@ void PooledTesting::runTests(int sPoolIndex, int iStart, int iEnd)
     }
 }
 
-void PooledTesting::testThePools(int sampleSize, int perCent)
+void PooledTesting::testThePools(int sampleSize, double perCent)
 {
     setupPools(sampleSize, perCent);
     for (int i = 0; i < testPools.size(); i++)
@@ -153,5 +149,5 @@ void PooledTesting::testThePools(int sampleSize, int perCent)
     testCounter = 0;
     tPeople = 1000;
     testPools.clear();
-    std::cout << "Data has been Reset" << std::endl;
+    std::cout << "Data has been reset." << std::endl;
 }

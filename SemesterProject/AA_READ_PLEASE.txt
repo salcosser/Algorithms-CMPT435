@@ -1,0 +1,8 @@
+Hello, you have two versions to choose from!
+
+
+for the command line interface version, after compiling with 'make', type './launch cli' to enter that version.
+For a quick test, type './launch <population size> <percentage positive as double (.05 for 5%)>'. ex.  './launch 1000 .02'
+
+
+WARNING: the command line interface version does not work with fractions of percentages (18.75%). For this, use the quick test.
