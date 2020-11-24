@@ -6,13 +6,17 @@
 int main(int argc, char **argv)
 {
     std::string type = std::string(argv[1]);
-
+    bool readOut = false;
+    if( argc == 5 && std::string(argv[4]) == "printAll"){
+        readOut = true;
+    }
     if (type == "quick")
     {
         PooledTesting *pt = new PooledTesting();
-        pt->testThePools(std::stod(argv[2]), std::stod(argv[3]));
+        pt->testThePools(std::stod(argv[2]), std::stod(argv[3]), readOut);
         
     }
+    
     else if (type == "cli")
     {
 
@@ -21,7 +25,7 @@ int main(int argc, char **argv)
         int sampSize = 0;
         double pcPos = 0;
         bool running = true;
-
+      
         std::cout << "****************************************" << std::endl;
         std::cout << "POOLED TESTING SIMULATOR" << std::endl;
         std::cout << "Welcome to the Pooled Testing Simulator!" << std::endl;
@@ -46,7 +50,7 @@ int main(int argc, char **argv)
 
                 while (!havePercent)
                 {
-                    std::cout << "What is your simulated percentage of positive cases as an integer (i.e. 3% would be 3)? or type 'quit' to exit" << std::endl;
+                    std::cout << "What is your simulated percentage of positive cases as a decimal number (i.e. 3% would be .03)? or type 'quit' to exit" << std::endl;
                     std::string preProcessedPer;
                     std::getline(std::cin, preProcessedPer);
                     if (preProcessedPer.find("quit") != std::string::npos)
@@ -55,28 +59,28 @@ int main(int argc, char **argv)
                         running = false;
                         break;
                     }
-                    else if ((preProcessedPer.find_first_not_of("0123456789") == std::string::npos))
+                    else if ((preProcessedPer.find_first_not_of("0123456789.") == std::string::npos))
                     {
-                        if (std::stoi(preProcessedPer) <= 100)
+                        if (std::stod(preProcessedPer) <= 1)
                         {
-                            pcPos = (std::stod(preProcessedPer) * .01);
+                            pcPos = std::stod(preProcessedPer);
 
                             PooledTesting *pt = new PooledTesting(); //actually doing the tests
-                            pt->testThePools(sampSize, pcPos);
+                            pt->testThePools(sampSize, pcPos, true);
 
-                            std::cout << "completed test of " << sampSize << " people with an overall positivity percentage of " << pcPos << "." << std::endl;
+                            std::cout << "completed test of " << sampSize << " people with an overall positivity percentage of " << (pcPos * 100)<< "% ("<< pcPos <<")" << "." << std::endl;
 
                             havePercent = true;
                         }
                         else
                         {
-                            std::cout << "ERROR: Please only use positive integer numbers between 0 and 100 for percentages (i.e. 3% would be 3).\a" << std::endl;
+                            std::cout << "ERROR: Please only use positive decimal numbers between 0 and 1 (i.e. 3% would be .03).\a" << std::endl;
                             std::cout << "--------------------------------------------------------" << std::endl;
                         }
                     }
                     else
                     {
-                        std::cout << "ERROR: Please only use positive integer numbers between 0 and 100 for percentages (i.e. 3% would be 3).\a" << std::endl;
+                        std::cout << "ERROR: Please only use positive decimal numbers between 0 and 1 (i.e. 3% would be .03).\a" << std::endl;
                         std::cout << "--------------------------------------------------------" << std::endl;
                     }
                 }

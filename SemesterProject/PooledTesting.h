@@ -7,10 +7,11 @@ class PooledTesting{
     int poolSize = 8;
     int activeCases = 0;
     int testCounter = 0;
-    void runTests(int sPoolIndex, int iStart, int iEnd);
+    void runTests(int sPoolIndex, int iStart, int iEnd,bool readOut);
     void setupPools(double size, double pcPos);
-    bool test(int sPoolIndex, int iStart, int iEnd);
-    void testThePools(int sampleSize,  double perCent);
+    bool test(int sPoolIndex, int iStart, int iEnd, bool readOut);
+    void testThePools(int sampleSize,  double perCent, bool printOut);
+    void itTest(int sPoolIndex, bool readOut);
     std::vector<std::vector<int>> testPools;
 
 };

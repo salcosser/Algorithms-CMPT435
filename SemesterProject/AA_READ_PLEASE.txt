@@ -1,8 +1,6 @@
-Hello, you have two versions to choose from!
+Documentation For Pooled Testing Simulators. Because of the increased amount of time, I was able to build out two versions of runnning this assignment.
+A simple command based runner, and a command line interface version for running multiple tests.
 
-
-for the command line interface version, after compiling with 'make', type './launch cli' to enter that version.
-For a quick test, type './launch <population size> <percentage positive as double (.05 for 5%)>'. ex.  './launch 1000 .02'
-
-
-WARNING: the command line interface version does not work with fractions of percentages (18.75%). For this, use the quick test.
+./launch quick 1000 .02             |           run a single simulation of 1000 people with a 2% random positivity
+./launch quick 1000 .02 printAll    |           run a single simulation of 1000 people with a 2% random positivity, and print out the results of all of the simulated tests
+./launch cli                        |           run the simulator with the command line interface
