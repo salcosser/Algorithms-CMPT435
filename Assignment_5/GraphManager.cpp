@@ -8,7 +8,7 @@
 #include "GraphManager.h"
 #include "Vertex.h"
 #include "Edge.h"
-
+#include <math.h>
 using namespace std;
 void GraphManager::fileReader(std::string fileName)
 {
@@ -39,12 +39,12 @@ void GraphManager::fileReader(std::string fileName)
 
 				
 
-					cout  << graph.size()<< "|" << edges.size() << endl;
+					cout  << graph.size()<< "|" << weightMatrix.size() << endl;
 
 
 
 
-					edges.clear();
+					weightMatrix.clear();
 					graph.clear(); //restarting the graph
 				}
 				started = true;
@@ -80,7 +80,7 @@ void GraphManager::fileReader(std::string fileName)
 								e->dest = graph[j];
 								e->from = graph[i];
 								
-								edges.push_back(e);
+								weightMatrix.push_back(e);
 								graph[i]->dests.push_back(e);
 							}
 						}
@@ -92,7 +92,43 @@ void GraphManager::fileReader(std::string fileName)
 	newfile.close();
 	cout << "Vertices" << endl;
 		
-					cout << graph.size() << "|"<<  edges.size() << endl;
+					cout << graph.size() << "|"<<  weightMatrix.size() << endl;
 	cout << "NOTHING BROKE!!!" << endl;
 	return;
 };
+
+   void GraphManager::init(Vertex * source){
+	   	for(int i = 0;i<graph.size();i++){
+			   graph[i]->distance = INFINITY;
+				graph[i]->prev = nullptr;
+			
+		   }
+		   source->distance = 0; 
+   }
+
+
+void GraphManager::relax(Edge * edge){
+	if(edge->dest->distance > edge->from->distance + edge->weight){
+		edge->dest->distance = edge->from->distance + edge->weight;
+		edge->dest->prev = edge->from;
+	}
+
+}
+
+bool GraphManager::Bellman(){
+	init(graph[0]);
+	for(int i = 0;i<graph.size();i++){
+		for(int j = 0;j<weightMatrix.size();j++){
+			relax(weightMatrix[j]);
+		}
+	}
+	for(int q=0;q<weightMatrix.size();q++){
+		if(weightMatrix[q]->dest->distance > weightMatrix[q]->from->distance + weightMatrix[q]->weight){
+			cout << "Uh Oh! Found a negative cycle!" << endl;
+			return false;
+		}
+	}
+	cout << "Nothing went wrong!"<<endl;
+	return true;
+}
+

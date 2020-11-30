@@ -30,5 +30,6 @@ int main()
 
 	GraphManager *gm = new GraphManager();
 	gm->fileReader("graphs2.txt"); //create the graph and process it
+	gm->Bellman();
 	return 0;
 }
