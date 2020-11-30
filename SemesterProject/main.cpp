@@ -29,6 +29,7 @@ int main(int argc, char **argv)
         std::cout << "****************************************" << std::endl;
         std::cout << "POOLED TESTING SIMULATOR" << std::endl;
         std::cout << "Welcome to the Pooled Testing Simulator!" << std::endl;
+        
         while (running)
         {
             bool havePercent = false;

@@ -45,5 +45,7 @@
         "xstddef": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "window.zoomLevel": 1,
+    "editor.fontSize": 15
 }

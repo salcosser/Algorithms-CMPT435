@@ -242,7 +242,7 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
             std::cout << "POOL #" << sPoolIndex << ":Tests used:" << poolTests << std::endl;
             std::cout << "POOL #" << sPoolIndex << ":Cases found:" << poolCases << std::endl;
         }
-    }
+    
 }
 
 void PooledTesting::testThePools(int sampleSize, double perCent, bool readOut)
