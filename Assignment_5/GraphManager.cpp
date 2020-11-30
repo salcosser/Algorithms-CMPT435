@@ -7,7 +7,7 @@
 #include <iterator>
 #include "GraphManager.h"
 #include "Vertex.h"
-
+#include "Edge.h"
 
 using namespace std;
 void GraphManager::fileReader(std::string fileName)
@@ -18,7 +18,7 @@ void GraphManager::fileReader(std::string fileName)
 	string ln;
 	int count = 0;
 	bool started = false;
-	newfile.open(fileName,ios::in);
+	newfile.open(fileName, ios::in);
 	if (newfile.is_open())
 	{
 		while (getline(newfile, ln)) //read each line of the file
@@ -29,14 +29,23 @@ void GraphManager::fileReader(std::string fileName)
 
 				if (started)
 				{
-					cout << "To Doing Stuff" <<endl;
+					cout << "To Doing Stuff" << endl;
 					/**
 					 * SSSP stuff
 					 * 
 					 * 
 					 * 
 					 * */
-					graph.clear();		//restarting the graph
+
+				
+
+					cout  << graph.size()<< "|" << edges.size() << endl;
+
+
+
+
+					edges.clear();
+					graph.clear(); //restarting the graph
 				}
 				started = true;
 			}
@@ -45,18 +54,18 @@ void GraphManager::fileReader(std::string fileName)
 				int id = stoi(ln.substr(11));
 				Vertex *vertex = new Vertex();
 				vertex->id = id;
-				graph.push_back(vertex);			//make a vertex with an id of the number on the line
+				graph.push_back(vertex); //make a vertex with an id of the number on the line
 			}
 			else if (ln.find("add edge") != string::npos)
 			{
 
 				int hyph = ln.find("-");
 
-				int num1 = stoi(ln.substr((ln.find("edge") + 5), 2));					//grabbing both numbers out
+				int num1 = stoi(ln.substr((ln.find("edge") + 5), 2)); //grabbing both numbers out
 				int num2 = stoi(ln.substr(hyph + 2, 2));
 				int weight = stoi(ln.substr(hyph + 4));
-
-				for (int i = 0; i < graph.size(); i++)				//using two different "fingers" on the vector at a time
+				bool foundMatches = false;
+				for (int i = 0; i < graph.size(); i++) //using two different "fingers" on the vector at a time
 				{
 					if (graph[i]->id == num1)
 					{
@@ -66,10 +75,13 @@ void GraphManager::fileReader(std::string fileName)
 							{
 								//graph[i]->neighbors.push_back(graph[j]);			//a neighbor of b,  b neighbor of a
 								//graph[j]->neighbors.push_back(graph[i]);
-								Edge * e = new Edge();
+								Edge *e = new Edge();
 								e->weight = weight;
 								e->dest = graph[j];
-								graph[i]->edges.push_back(e);
+								e->from = graph[i];
+								
+								edges.push_back(e);
+								graph[i]->dests.push_back(e);
 							}
 						}
 					}
@@ -78,7 +90,9 @@ void GraphManager::fileReader(std::string fileName)
 		}
 	}
 	newfile.close();
-	cout <<"NOTHING BROKE!!!"<<endl;
+	cout << "Vertices" << endl;
+		
+					cout << graph.size() << "|"<<  edges.size() << endl;
+	cout << "NOTHING BROKE!!!" << endl;
 	return;
 };
-

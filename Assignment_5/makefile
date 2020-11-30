@@ -4,7 +4,7 @@ launch: Main.o  GraphManager.o
 Main.o: Main.cpp GraphManager.h
 	g++ -std=c++14  -c Main.cpp
 
-GraphManager.o: GraphManager.cpp Vertex.h 
+GraphManager.o: GraphManager.cpp Vertex.h
 	g++ -std=c++14 -c GraphManager.cpp
 
 clean:

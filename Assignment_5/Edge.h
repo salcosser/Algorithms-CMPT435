@@ -1,8 +1,11 @@
-#pragma Once
+#pragma once
+#include <iostream>
 #include "Vertex.h"
-
-class Edge{
-    public:
-    Vertex * dest;
+class Vertex;
+class Edge
+{
+public:
     int weight;
+    Vertex *dest;
+    Vertex *from;
 };

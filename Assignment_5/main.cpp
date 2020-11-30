@@ -29,6 +29,6 @@ int main()
 {
 
 	GraphManager *gm = new GraphManager();
-	gm->fileReader("graphs1.txt"); //create the graph and process it
+	gm->fileReader("graphs2.txt"); //create the graph and process it
 	return 0;
 }
