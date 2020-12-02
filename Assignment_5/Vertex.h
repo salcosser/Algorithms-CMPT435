@@ -7,7 +7,6 @@ class Vertex
 {
 public:
     int id;
-    std::vector<Edge *> dests;
     int distance;
     Vertex *prev;
 };

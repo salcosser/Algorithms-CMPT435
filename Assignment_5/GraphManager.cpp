@@ -9,6 +9,7 @@
 #include "Vertex.h"
 #include "Edge.h"
 #include <math.h>
+#include <limits>
 using namespace std;
 void GraphManager::fileReader(std::string fileName)
 {
@@ -29,21 +30,9 @@ void GraphManager::fileReader(std::string fileName)
 
 				if (started)
 				{
-					cout << "To Doing Stuff" << endl;
-					/**
-					 * SSSP stuff
-					 * 
-					 * 
-					 * 
-					 * */
-
-				
-
-					cout  << graph.size()<< "|" << weightMatrix.size() << endl;
-
-
-
-
+cout << "**********************************"<<endl;
+					Bellman();
+cout << "**********************************"<<endl;
 					weightMatrix.clear();
 					graph.clear(); //restarting the graph
 				}
@@ -73,15 +62,14 @@ void GraphManager::fileReader(std::string fileName)
 						{
 							if (graph[j]->id == num2)
 							{
-								//graph[i]->neighbors.push_back(graph[j]);			//a neighbor of b,  b neighbor of a
-								//graph[j]->neighbors.push_back(graph[i]);
+
 								Edge *e = new Edge();
 								e->weight = weight;
 								e->dest = graph[j];
 								e->from = graph[i];
-								
+								//cout  << num1 << " , "<< num2 << "|" << weight << endl;
 								weightMatrix.push_back(e);
-								graph[i]->dests.push_back(e);
+								//graph[i]->dests.push_back(e);
 							}
 						}
 					}
@@ -90,45 +78,82 @@ void GraphManager::fileReader(std::string fileName)
 		}
 	}
 	newfile.close();
-	cout << "Vertices" << endl;
-		
-					cout << graph.size() << "|"<<  weightMatrix.size() << endl;
-	cout << "NOTHING BROKE!!!" << endl;
+
 	return;
 };
 
-   void GraphManager::init(Vertex * source){
-	   	for(int i = 0;i<graph.size();i++){
-			   graph[i]->distance = INFINITY;
-				graph[i]->prev = nullptr;
-			
-		   }
-		   source->distance = 0; 
-   }
-
-
-void GraphManager::relax(Edge * edge){
-	if(edge->dest->distance > edge->from->distance + edge->weight){
-		edge->dest->distance = edge->from->distance + edge->weight;
-		edge->dest->prev = edge->from;
+void GraphManager::init(Vertex *source)
+{
+	for (int i = 0; i < graph.size(); i++)
+	{
+		graph[i]->distance = 10000000;
+		graph[i]->prev = nullptr;
 	}
-
+	source->distance = 0;
+	//cout << "source dist has been initialized to "<< source->distance << endl;
 }
 
-bool GraphManager::Bellman(){
+void GraphManager::relax(Edge *edge, Vertex *from, Vertex *dest)
+{
+	if (dest->distance > from->distance + edge->weight)
+	{
+		dest->distance = from->distance + edge->weight;
+		dest->prev = from;
+	}
+}
+
+bool GraphManager::Bellman()
+{
 	init(graph[0]);
-	for(int i = 0;i<graph.size();i++){
-		for(int j = 0;j<weightMatrix.size();j++){
-			relax(weightMatrix[j]);
+	for (int i = 0; i < graph.size(); i++)
+	{
+		for (Edge *e : weightMatrix)
+		{
+			relax(e, e->from, e->dest);
 		}
 	}
-	for(int q=0;q<weightMatrix.size();q++){
-		if(weightMatrix[q]->dest->distance > weightMatrix[q]->from->distance + weightMatrix[q]->weight){
+	for (int q = 0; q < weightMatrix.size(); q++)
+	{
+		if (weightMatrix[q]->dest->distance > weightMatrix[q]->from->distance + weightMatrix[q]->weight)
+		{
 			cout << "Uh Oh! Found a negative cycle!" << endl;
 			return false;
 		}
 	}
-	cout << "Nothing went wrong!"<<endl;
+
+	for (int n = 1; n < graph.size(); n++)
+	{
+		printPath(graph[0], graph[n]);
+	}
+
 	return true;
 }
 
+void GraphManager::printPath(Vertex *source, Vertex *dest)
+{
+	vector<Vertex *> traceback;
+	cout << source->id << "->" << dest->id << " cost is " << dest->distance << "; path: ";
+	bool found = false;
+	Vertex *currentV = dest;
+	while (!found)
+	{
+		if (currentV->id != source->id)
+		{
+			//cout << "HERE" <<endl;
+			traceback.push_back(currentV);
+			currentV = currentV->prev;
+		}
+		else
+		{
+			//cout << "ALSO HERE" <<endl;
+			found = true;
+		}
+	}
+	cout << source->id;
+	//cout << traceback.size() << endl;
+	for (int i = traceback.size() - 1; i >= 0; i--)
+	{
+		cout << "->" << traceback[i]->id;
+	}
+	cout << endl;
+}
