@@ -13,6 +13,5 @@ class GraphManager{
     void init(Vertex * source);
     void relax(Edge * edge, Vertex * from, Vertex * dest);
      bool Bellman();
-     void bellmanOut(Vertex * source);
      void printPath(Vertex * source, Vertex * dest);
 };

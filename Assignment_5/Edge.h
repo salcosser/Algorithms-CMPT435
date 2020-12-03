@@ -5,7 +5,7 @@ class Vertex;
 class Edge
 {
 public:
-    int weight;
-    Vertex *dest;
-    Vertex *from;
+    int weight;         //weight of the edge
+    Vertex *dest;       //points to where the edge goes
+    Vertex *from;       //points to where the edge is from
 };

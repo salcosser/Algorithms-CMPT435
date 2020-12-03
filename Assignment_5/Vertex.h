@@ -6,7 +6,7 @@ class Edge;
 class Vertex
 {
 public:
-    int id;
-    int distance;
-    Vertex *prev;
+    int id;         //id of the vertex
+    int distance;   //distance from the source
+    Vertex *prev;   //points to the previous vertex
 };

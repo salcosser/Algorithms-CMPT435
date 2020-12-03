@@ -32,7 +32,7 @@ void GraphManager::fileReader(std::string fileName)
 				{
 cout << "**********************************"<<endl;
 					Bellman();
-cout << "**********************************"<<endl;
+
 					weightMatrix.clear();
 					graph.clear(); //restarting the graph
 				}
@@ -53,7 +53,7 @@ cout << "**********************************"<<endl;
 				int num1 = stoi(ln.substr((ln.find("edge") + 5), 2)); //grabbing both numbers out
 				int num2 = stoi(ln.substr(hyph + 2, 2));
 				int weight = stoi(ln.substr(hyph + 4));
-				bool foundMatches = false;
+				
 				for (int i = 0; i < graph.size(); i++) //using two different "fingers" on the vector at a time
 				{
 					if (graph[i]->id == num1)
@@ -67,9 +67,9 @@ cout << "**********************************"<<endl;
 								e->weight = weight;
 								e->dest = graph[j];
 								e->from = graph[i];
-								//cout  << num1 << " , "<< num2 << "|" << weight << endl;
+								
 								weightMatrix.push_back(e);
-								//graph[i]->dests.push_back(e);
+								
 							}
 						}
 					}
@@ -78,7 +78,8 @@ cout << "**********************************"<<endl;
 		}
 	}
 	newfile.close();
-
+	cout << "**********************************"<<endl;
+	Bellman();
 	return;
 };
 
@@ -86,11 +87,11 @@ void GraphManager::init(Vertex *source)
 {
 	for (int i = 0; i < graph.size(); i++)
 	{
-		graph[i]->distance = 10000000;
+		graph[i]->distance = 10000000; // using a value thats too big to be smaller than anything
 		graph[i]->prev = nullptr;
 	}
-	source->distance = 0;
-	//cout << "source dist has been initialized to "<< source->distance << endl;
+	source->distance = 0;		//starting point
+
 }
 
 void GraphManager::relax(Edge *edge, Vertex *from, Vertex *dest)
@@ -105,14 +106,14 @@ void GraphManager::relax(Edge *edge, Vertex *from, Vertex *dest)
 bool GraphManager::Bellman()
 {
 	init(graph[0]);
-	for (int i = 0; i < graph.size(); i++)
+	for (int i = 0; i < graph.size(); i++) 		//relax each edge graph.size() number of times
 	{
 		for (Edge *e : weightMatrix)
 		{
 			relax(e, e->from, e->dest);
 		}
 	}
-	for (int q = 0; q < weightMatrix.size(); q++)
+	for (int q = 0; q < weightMatrix.size(); q++) 					//re test each edge for negative cycles
 	{
 		if (weightMatrix[q]->dest->distance > weightMatrix[q]->from->distance + weightMatrix[q]->weight)
 		{
@@ -121,7 +122,7 @@ bool GraphManager::Bellman()
 		}
 	}
 
-	for (int n = 1; n < graph.size(); n++)
+	for (int n = 1; n < graph.size(); n++)			// print the path from the source to each vertex
 	{
 		printPath(graph[0], graph[n]);
 	}
@@ -137,21 +138,21 @@ void GraphManager::printPath(Vertex *source, Vertex *dest)
 	Vertex *currentV = dest;
 	while (!found)
 	{
-		if (currentV->id != source->id)
+		if (currentV->id != source->id)			//if the current one isnt the source, log it and keep going
 		{
-			//cout << "HERE" <<endl;
+			
 			traceback.push_back(currentV);
 			currentV = currentV->prev;
 		}
 		else
 		{
-			//cout << "ALSO HERE" <<endl;
+			
 			found = true;
 		}
 	}
 	cout << source->id;
-	//cout << traceback.size() << endl;
-	for (int i = traceback.size() - 1; i >= 0; i--)
+	
+	for (int i = traceback.size() - 1; i >= 0; i--)		// print each one starting from the back, couldve used stack, but not necessary
 	{
 		cout << "->" << traceback[i]->id;
 	}

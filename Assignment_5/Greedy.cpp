@@ -36,7 +36,7 @@ void Greedy::setupSpices(std::string fileName)
             }
             else if (ln.find("spice name") != string::npos)
             {
-                vector<string> parts;
+                vector<string> parts;               //keeps the data points from the line
 
                 for (int i = 0; i < ln.size(); i++)
                 {
@@ -47,22 +47,22 @@ void Greedy::setupSpices(std::string fileName)
                             if (ln[j] == '=')
                             {
 
-                                string sub = ln.substr(j + 2, (i - j) - 2);
+                                string sub = ln.substr(j + 2, (i - j) - 2);     // found the bounds of a value, so push it on
 
                                 parts.push_back(sub);
-                                // cout << "from" << j << " to " << i << endl;
+                              
                                 break;
                             }
                         }
                     }
                 }
 
-                Spice *nSpice = new Spice();
+                Spice *nSpice = new Spice();            //make and push the spice
                 nSpice->color = parts[0];
                 nSpice->setPrice(stod(parts[1]), stod(parts[2]));
                 spices.push_back(nSpice);
 
-                //cout <<nSpice->color << ":T, U, Q,::"<< nSpice->tPrice <<"|"<< nSpice->uPrice<<"|" << nSpice->qty<<"|"<< endl;
+               
             }
         }
     }
@@ -80,14 +80,14 @@ void Greedy::greedyAlgo(int capacity)
     };
 
     int cTotal = 0;
-    vector<Portion *> ks;
-    double earnings = 0;
+    vector<Portion *> ks;       //stores the portions
+    double earnings = 0;        //stores the earnings
     while (cTotal != capacity)
     {
         // this process assumes that the items have been sorted before
-        for (int i = spices.size() - 1; i > 0; i--)
+       for (int i = spices.size() - 1; i > 0; i--)
         {
-            if ((cTotal + spices[i]->qty) <= capacity)
+            if ((cTotal + spices[i]->qty) <= capacity)      //if the whole lot of the spice can fit, add it all to the knapsack
             {
 
                 Portion *p = new Portion();
@@ -95,9 +95,9 @@ void Greedy::greedyAlgo(int capacity)
                 p->spice = spices[i];
                 cTotal += spices[i]->qty;
                 ks.push_back(p);
-                earnings += ((p->spice->uPrice) * (p->qty));
+                earnings += p->spice->tPrice;
             }
-            else if (((capacity - cTotal) > 0) && ((cTotal + spices[i]->qty) > capacity))
+            else if (((capacity - cTotal) > 0) && ((cTotal + spices[i]->qty) > capacity))       //if only some can fit in the knapsack, add however much will fit
             {
 
                 Portion *part = new Portion();
@@ -111,7 +111,7 @@ void Greedy::greedyAlgo(int capacity)
         }
     }
 
-    cout << "Knapsack of capacity " << capacity << " is worth " << earnings << " quatloos and" << endl;
+    cout << "Knapsack of capacity " << capacity << " is worth " << earnings << " quatloos and" << endl;             //print out the earnings followed by a gramatically correct statement about the contents of the knapsack
     cout << "contains ";
     for (int n = 0; n < ks.size(); n++)
     {
