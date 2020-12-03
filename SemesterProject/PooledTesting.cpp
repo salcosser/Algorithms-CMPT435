@@ -244,7 +244,7 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
         }
     
 }
-
+}
 void PooledTesting::testThePools(int sampleSize, double perCent, bool readOut)
 {
     setupPools(sampleSize, perCent);
