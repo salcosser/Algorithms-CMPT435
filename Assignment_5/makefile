@@ -10,7 +10,7 @@ GraphManager.o: GraphManager.cpp Vertex.h
 Greedy.o: Greedy.cpp Greedy.h Sort.h
 	g++ -std=c++14 -c Greedy.cpp
 
-Sort.o: Sort.cpp SOrt.h
+Sort.o: Sort.cpp Sort.h
 	g++ -std=c++14 -c Sort.cpp
 
 clean:
