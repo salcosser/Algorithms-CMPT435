@@ -64,92 +64,6 @@ void PooledTesting::setupPools(double size, double pcPos)
     std::cout << testPools.size() << " pools have been set up." << std::endl;
 }
 
-bool PooledTesting::test(int sPoolIndex, int iStart, int iEnd, bool readOut)
-{
-    ++testCounter;
-    if (readOut)
-    {
-        std::cout << "------------Test set #" << testCounter << "---------------" << std::endl;
-        std::cout << "-------- Testing Pool #" << sPoolIndex << ", " << iStart << " to " << iEnd << "--------" << std::endl;
-    }
-
-    bool foundCase = false;
-
-    if ((iEnd - iStart) > 1)
-    {
-        if (readOut)
-        {
-            std::cout << " ";
-        }
-
-        for (int i = iStart; i < iEnd; i++)
-        {
-            if (testPools[sPoolIndex][i] == 1)
-            {
-                foundCase = true;
-
-                if (readOut)
-                {
-                    std::cout << "X ";
-                }
-            }
-            else if (readOut)
-            {
-
-                std::cout << "O ";
-            }
-        }
-        if (readOut)
-        {
-            std::cout << std::endl;
-            std::cout << " 'X's denote positive cases, 'O's denote negative cases." << std::endl;
-        }
-    }
-    else
-    {
-        if (testPools[sPoolIndex][iStart] == 1)
-        {
-            activeCases++;
-            foundCase = true;
-
-            std::cout << "ALERT: a conclusive case was found in pool #" << sPoolIndex << " index " << iStart << std::endl;
-        }
-    }
-
-    if (readOut)
-    {
-        std::cout << "------------"
-                  << "total cases after testing:" << activeCases << "------------" << std::endl;
-    }
-
-    return foundCase;
-}
-
-void PooledTesting::runTests(int sPoolIndex, int iStart, int iEnd, bool readOut)
-{
-    int mid = (iStart + iEnd) / 2;
-
-    bool tCaseA = test(sPoolIndex, iStart, mid, readOut);
-    bool tCaseB = test(sPoolIndex, mid, iEnd, readOut);
-
-    if (tCaseA && ((mid - iStart) > 1))
-    {
-        runTests(sPoolIndex, iStart, mid, readOut);
-    }
-    else if (readOut)
-    {
-        std::cout << "Pool #" << sPoolIndex << " persons " << iStart << " - " << (mid + 1) << " have been cleared." << std::endl;
-    }
-
-    if (tCaseB && ((iEnd - mid) > 1))
-    {
-        runTests(sPoolIndex, mid, iEnd, readOut);
-    }
-    else if (readOut)
-    {
-        std::cout << "Pool #" << (sPoolIndex + 1) << " persons " << (mid + 1) << " - " << iEnd << " have been cleared." << std::endl;
-    }
-}
 
 void PooledTesting::itTest(int sPoolIndex, bool readOut)
 {
@@ -262,6 +176,8 @@ void PooledTesting::testThePools(int sampleSize, double perCent, bool readOut)
         }
     }
     std::cout << "Total cases found:" << activeCases << std::endl;
+    std::cout << "Observed infection percentage:" <<std::to_string(((double)activeCases / (double)sampleSize) * 100) << "%" << std::endl;
+    
     std::cout << "Total tests used:" << testCounter << std::endl;
     activeCases = 0;
     testCounter = 0;
