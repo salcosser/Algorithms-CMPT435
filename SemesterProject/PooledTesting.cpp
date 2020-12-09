@@ -12,19 +12,19 @@ void PooledTesting::setupPools(double size, double pcPos)
 {
 
     tPeople = size;
-    std::vector<int> population(tPeople, 0); //holds the whole population
+    std::vector<int> population(tPeople, 0);                  //holds the whole population
     int numPos = (int)(static_cast<double>(tPeople) * pcPos); //number of positive cases needed
 
     std::vector<int> indexes;
     int chosen = 0;
-    while (chosen < numPos)     // get the right amount of positive numbers for indexes
+    while (chosen < numPos) // get the right amount of positive numbers for indexes
     {
 
         std::random_device dev; //making the random number
         std::mt19937 rng(dev());
         std::uniform_int_distribution<std::mt19937::result_type> dist6(0, (tPeople - 1));
         int attempt = dist6(rng);
-        if (std::find(indexes.begin(), indexes.end(), attempt) != indexes.end())    //if the number hasnt been chosen, add it to the list. Otherwise skip
+        if (std::find(indexes.begin(), indexes.end(), attempt) != indexes.end()) //if the number hasnt been chosen, add it to the list. Otherwise skip
         {
             continue;
         }
@@ -41,19 +41,19 @@ void PooledTesting::setupPools(double size, double pcPos)
 
     int pools = (tPeople - remainder) / poolSize; //find the number of needed pools
 
-    for (int i = 0; i < pools; i++)         //setup the pools with their people
+    for (int i = 0; i < pools; i++) //setup the pools with their people
     {
         std::vector<int> pool;
         for (int j = 0; j < poolSize; j++)
         {
-            int subInd = (i * poolSize) + j;        //find the right index by taking the current index plus the already processed indexes
+            int subInd = (i * poolSize) + j; //find the right index by taking the current index plus the already processed indexes
             pool.push_back(population[subInd]);
         }
         testPools.push_back(pool);
     }
-    if (remainder > 0)      //complete the same process for the remainders, in one final pool
+    if (remainder > 0) //complete the same process for the remainders, in one final pool
     {
-        int processedCounter = pools * poolSize;        //start the index after the last processed index
+        int processedCounter = pools * poolSize; //start the index after the last processed index
         std::vector<int> remVect;
         for (int x = processedCounter - 1; x < tPeople; x++)
         {
@@ -63,7 +63,6 @@ void PooledTesting::setupPools(double size, double pcPos)
     }
     std::cout << testPools.size() << " pools have been set up." << std::endl;
 }
-
 
 void PooledTesting::itTest(int sPoolIndex, bool readOut)
 {
@@ -79,7 +78,6 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
         if (testPools[sPoolIndex][i] == 1)
         {
             initPos = true;
-           
         }
     }
     if (initPos)
@@ -94,7 +92,6 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
             if (testPools[sPoolIndex][j] == 1)
             {
                 s1 = true;
-              
             }
         }
         testCounter++;
@@ -105,7 +102,6 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
             if (testPools[sPoolIndex][k] == 1)
             {
                 s2 = true;
-               
             }
         }
         if (s1)
@@ -156,15 +152,14 @@ void PooledTesting::itTest(int sPoolIndex, bool readOut)
             std::cout << "POOL #" << sPoolIndex << ":Tests used:" << poolTests << std::endl;
             std::cout << "POOL #" << sPoolIndex << ":Cases found:" << poolCases << std::endl;
         }
-    
-}
+    }
 }
 void PooledTesting::testThePools(int sampleSize, double perCent, bool readOut)
 {
-    setupPools(sampleSize, perCent);    //run the setup
-    for (int i = 0; i < testPools.size(); i++)                  //run the pool test on each pool
+    setupPools(sampleSize, perCent);           //run the setup
+    for (int i = 0; i < testPools.size(); i++) //run the pool test on each pool
     {
-       
+
         itTest(i, readOut);
         if (readOut)
         {
@@ -175,11 +170,11 @@ void PooledTesting::testThePools(int sampleSize, double perCent, bool readOut)
             std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
         }
     }
-    std::cout << "Total cases found:" << activeCases << std::endl;                                                                              //print out the resulting data
-    std::cout << "Observed infection percentage:" <<std::to_string(((double)activeCases / (double)sampleSize) * 100.0) << "%" << std::endl;
-    
-    std::cout << "Total tests used:" << testCounter << std::endl;               
-    activeCases = 0;                                    //reset all data
+    std::cout << "Total cases found:" << activeCases << std::endl; //print out the resulting data
+    std::cout << "Observed infection percentage:" << std::to_string(((double)activeCases / (double)sampleSize) * 100.0) << "%" << std::endl;
+
+    std::cout << "Total tests used:" << testCounter << std::endl;
+    activeCases = 0; //reset all data
     testCounter = 0;
     tPeople = 1000;
     testPools.clear();
